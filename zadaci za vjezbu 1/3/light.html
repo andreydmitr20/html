@@ -5,11 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task 3</title>
+    <style>
+      .iframe_bulb_class {
+        width:100px;
+        height:200px;
+      }
+    </style>
 </head>
 <body>
-  <a href="pic_bulbon.gif">ON</a>
+  <iframe name="iframe_bulb" class="iframe_bulb_class" frameborder="0" src="pic_bulboff.gif"></iframe>
   <br>
-  <a href="pic_bulboff.gif">OFF</a>
+  <br>
+  <a href="pic_bulbon.gif" target="iframe_bulb">ON</a>
+  <br>
+  <a href="pic_bulboff.gif" target="iframe_bulb">OFF</a>
+  <br>
   <segment>
     <br>
     <a href="../5/pregled.html">Back to content</a>
