@@ -67,7 +67,11 @@
             border: 2px solid blue;
         }
 
-        li {
+        #task_2 li {
+            color: white;
+        }
+
+        #task_2 a {
             color: white;
         }
 
@@ -85,6 +89,10 @@
 
 
         /* Favourite Films list */
+        #task_3 table {
+            border-collapse: collapse;
+        }
+
         .table_img {
             height: 8rem;
         }
@@ -116,8 +124,92 @@
             background-color: rgb(239, 201, 112);
         }
 
-        /* #task_3 tbody {
-            overflow: auto;
+
+
+
+
+
+
+        /* JOB APPLICATION */
+        #task_4 fieldset {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            padding: 0;
+            border: none;
+        }
+
+        #task_4 p {
+            text-align: left;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        #task_4 input:not([type="submit"]),
+        #task_4 select,
+        #task_4 textarea {
+            width: 100%;
+            max-width: 30rem;
+        }
+
+        #task_4 .ul_none {
+            list-style-type: none;
+            margin-left: -2.5rem;
+        }
+
+        #task_4 li {
+            text-align: left;
+            margin-top: 0.5rem;
+        }
+
+        .inline-block-text {
+            display: inline-block;
+            /* width: 100%; */
+        }
+
+        /* form {
+            border: 1px solid black;
+            color: blue;
+        } */
+        /* 
+
+       
+
+        legend {
+            font-size: 1.2rem;
+        }
+
+        input[type="submit"] {
+            font-size: 1rem;
+            width: auto;
+        }
+
+
+
+        select,
+        option,
+        ul {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+
+        span {
+            display: block;
+            overflow: hidden;
+        }
+
+        .li-text {
+            float: left;
+            margin-right: 0.5rem;
+            margin-left: -0.8rem;
+            color: black;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            margin-bottom: 0.2rem;
         } */
     </style>
 </head>
@@ -128,8 +220,8 @@
             <ul class="background_main">
                 <li><a href="#task_1">Top</a></li>
                 <li><a href="#task_2">CV</a></li>
-                <li><a href="#task_3">Favourite Films list</a></li>
-                <li><a href="#task_4">4</a></li>
+                <li><a href="#task_3">Favourite Films List</a></li>
+                <li><a href="#task_4">Job Application</a></li>
                 <li><a href="#task_5">5</a></li>
             </ul>
         </nav>
@@ -319,6 +411,89 @@
     </div>
 
     <div id="task_4">
+        <br>
+        <div class="div_lg"></div>
+        <br>
+        <h2>Job Application With Resume Upload</h2>
+        <form method="get" action="#">
+            <fieldset>
+                <!-- <legend>Contact Information</legend> -->
+                <p>Contact Information</p>
+                <ul class="ul_none">
+                    <li class="inline-block-text">
+                        <div>First Name *</div>
+                        <span><input type="text" name="first_name" required></span>
+                    </li>
+                    <li class="inline-block-text">
+                        <div>Last Name *</div>
+                        <span><input type="text" name="last_name" required></span>
+                    </li>
+                    <li>
+                        <div class="li-text">Email *</div>
+                        <span><input type="email" name="email" required></span>
+                    </li>
+                    <li>
+                        <div class="li-text">Phone *</div>
+                        <span><input type="text" name="phone"></span>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <!-- <legend>Position</legend> -->
+                <p>Position</p>
+                <ul class="ul_none">
+                    <li>
+                        <div class="li-text">Position you are applying for *</div>
+                        <span><select size="1" name="country" required>
+                                <option value="">None</option>
+                                <option value="Backend NodeJS" selected>Backend NodeJS</option>
+                                <option value="Backend Python">Backend Python</option>
+                                <option value="Dentist" disabled>Dentist</option>
+                                <option value="Frontend React">Frontend React</option>
+                                <option value="Frontend Angular">Frontend Angular</option>
+                            </select>
+                        </span>
+                    </li>
+
+                    <li>
+                        <div class="li-text">Resume upload</div>
+                        <span><input type="file" name="resume"></span>
+                    </li>
+                    <li>
+                        <div class="li-text">Portfolio website</div>
+                        <span><input type="url" name="website"></span>
+                    </li>
+
+                    <li>
+                        <div class="li-text">Salary Requirements</div>
+                        <span><input type="number" name="salary"></span>
+                    </li>
+                    <li>
+                        <div class="li-text">When can you start?</div>
+                        <span><input type="text" name="when_start"></span>
+                    </li>
+                    <li>
+                        <div class="li-text">Are you willing to relocate?</div>
+                        <!-- <span> -->
+                        <label><input type="radio" name="relocate" value="yes">Yes</label>
+                        <label><input type="radio" name="relocate" value="no">No</label>
+                        <label><input type="radio" name="relocate" value="not sure">Not sure</label>
+
+                        <!-- </span> -->
+                    </li>
+                    <li>
+                        <div class="li-text">Last company you worked for</div>
+                        <span><input type="text" name="last_company"></span>
+                    </li>
+                    <li>
+                        <div class="li-text">Comments</div>
+                        <span><textarea name="comments" required></textarea></span>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <input type="submit" value="Submit">
+        </form>
 
     </div>
     <div id="task_5">
