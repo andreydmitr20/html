@@ -28,6 +28,7 @@
             right: 0;
             width: auto;
             z-index: 10;
+            border: 2px double white;
         }
 
         nav ul li {
@@ -71,9 +72,48 @@
         }
 
         p,
-        h2 {
+        h3 {
             text-align: center;
             font-size: 1.5rem;
+        }
+
+
+
+
+
+
+
+
+        /* Favourite Films list */
+        .table_img {
+            height: 8rem;
+        }
+
+        .background_table {
+            background-color: cadetblue;
+            color: rgb(3, 5, 52);
+        }
+
+        .table_caption {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .film_table,
+        .film_table td {
+            border: solid 1px black;
+            text-align: center;
+        }
+
+        .col_description {
+            width: 50%;
+            background-color: antiquewhite;
+        }
+
+        .col_name {
+            width: 20%;
+            background-color: aquamarine;
         }
     </style>
 </head>
@@ -82,9 +122,9 @@
     <div id="task_1">
         <nav>
             <ul class="background_main">
-                <li><a href="#task_1">Menu:</a></li>
+                <li><a href="#task_1">Top</a></li>
                 <li><a href="#task_2">CV</a></li>
-                <li><a href="#task_3">3</a></li>
+                <li><a href="#task_3">Favourite Films list</a></li>
                 <li><a href="#task_4">4</a></li>
                 <li><a href="#task_5">5</a></li>
             </ul>
@@ -92,18 +132,18 @@
     </div>
 
     <div id="task_2">
-        <h1>CV</h1>
+        <h2>CV</h2>
         <div class="div_lg"></div>
-        <!-- <label for="cv_photo">Andrei Osetrov</label> -->
         <table>
             <tr>
                 <td>
-                    <p>Andrei Osetrov</p>
+                    <p><strong>Andrei Osetrov</strong></p>
+                    <br>
                     <img id="cv_photo" src="img/cv_photo.jpg" alt="A photo for CV">
 
                 </td>
                 <td class="background_main">
-                    <h2>Skills</h2>
+                    <h3>Skills</h3>
                     <ul>
                         <li>
                             At the moment I am studying at the <a href="https://www.ucg.ac.me/etf">University of
@@ -112,9 +152,9 @@
                             developer.
                         </li>
                         <li>
-                            I have finished the course “Introduction to programming, Python” at the <a
-                                href="https://www.ucg.ac.me/etf">UCG</a> and have
-                            writed two small pet projects on Python.
+                            <strong>I have finished the course “Introduction to programming, Python” at the <a
+                                    href="https://www.ucg.ac.me/etf">UCG</a> and have
+                                writed two small pet projects on Python.</strong>
                         </li>
                         <li>
                             Through SSH I am able to set up remote Linux VPS (for example, AWS t2.micro) with
@@ -137,12 +177,12 @@
             </tr>
             <tr>
                 <td class="background_main">
-                    <h2>Languages</h2>
-                    <ul>
+                    <h3>Languages</h3>
+                    <ol>
                         <li>Russian: native.</li>
-                        <li>English: fluent technical reading, intermediate language speaker (A2).</li>
+                        <li><strong>English: fluent technical reading, intermediate language speaker (A2)</strong>.</li>
                         <li>Montenegrin: in process.</li>
-                    </ul>
+                    </ol>
                 </td>
                 <td>
 
@@ -153,7 +193,7 @@
 
                 </td>
                 <td class="background_main">
-                    <h2>Experience in programming</h2>
+                    <h3>Experience in programming</h3>
                     <ul>
                         <li>2022. I’ve made a <a href="https://github.com/andreydmitr20/flat_rent_scraper">flat rent
                                 scraper</a>
@@ -186,7 +226,39 @@
     </div>
 
     <div id="task_3">
-
+        <div class="div_lg"></div>
+        <table class="film_table background_table">
+            <thead>
+                <tr>
+                    <td class="table_caption" colspan="5">Favourite Films List
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col_name">Name</th>
+                    <th class="col_description">Description</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                    <th>Poster and Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col_name">Fucking Amal</td>
+                    <td class="col_description">Two teenage girls in small-town Sweden. Elin is beautiful, popular, and
+                        bored with life. Agnes
+                        is friendless, sad, and secretly in love with Elin.</td>
+                    <td>Romance, Drama</td>
+                    <td>1998</td>
+                    <td><a href="https://www.imdb.com/title/tt0150662/">
+                            <img class="table_img" alt="Fucking Amal"
+                                src="https://m.media-amazon.com/images/M/MV5BY2NhMzRmMGYtNjA5OC00OTkzLThiN2UtZjA0ZmM2M2M0MzFlXkEyXkFqcGdeQXVyNzQxNDExNTU@._V1_.jpg">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        izlaska, cover slika, i link (npr. detalji) koji vodi na detaljan opis filma na
+        IMDB.
     </div>
 
     <div id="task_4">
