@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1> Software Order Form</h1>
+    <form method="post" action="#">
+        <fieldset>
+            <legend>License Details</legend>
+            <ul>
+                <li>
+                    <div class="li-text">&#9679; Email: </div>
+                    <span><input type="email" name="email" required></span>
+                </li>
+
+                <li>
+                    <div class="li-text">&#9679; Website: </div>
+                    <span><input type="text" name="website" required placeholder="www.example.com"></span>
+                </li>
+
+                <li>
+                    <div class="li-text">&#9679; Number of licenses: </div>
+                    <span><input type="number" required name="licenses_number" min="1" max="10"
+                            placeholder="How many to buy (1-10)"></span>
+                </li>
+
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>Billing Details</legend>
+            <ul>
+                <li>
+                    <div class="li-text">&#9679; Name: </div>
+                    <span><input type="text" name="name" required placeholder="First Last"></span>
+                </li>
+
+                <li>
+                    <div class="li-text">&#9679; Address: </div>
+                    <span><textarea name="address" required
+                            placeholder="House number, street, city, state"></textarea></span>
+                </li>
+
+
+                <li>
+                    <div class="li-text">&#9679; Postal Code: </div>
+                    <span><input type="number" name="post_code" required placeholder="Post code or zip code"></span>
+                </li>
+
+
+                <li>
+                    <div class="li-text">&#9679; Country: </div>
+                    <span><select size="1" name="country" required>
+                            <option value="">None</option>
+                            <option value="Montenegro">Montenegro</option>
+                            <option value="China">China</option>
+                            <option value="Russia" disabled>Russia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Italy">Italy</option>
+                        </select>
+                    </span>
+
+                </li>
+
+                <li>
+                    <div class="li-text">&#9679; Phone (optional): </div>
+                    <span><input type="text" name="phone" placeholder="Include country prefix, e.g."></span>
+                </li>
+
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>Payment Details</legend>
+            <ul>
+                <li>
+                    <div class="li-text">&#9679; Card Number: </div>
+                    <span><input type="number" max="9999999999999999" name="card_number" required
+                            placeholder="As shown on the front of your card"></span>
+                </li>
+
+                <li>
+                    <div class="li-text">&#9679; CVV Code: </div>
+                    <span><input type="number" max="999" name="cvv_code" required
+                            placeholder="3-digit number on the back of your card"></span>
+                </li>
+
+                <li>
+                    <div class="li-text">&#9679; Expiry Date: </div>
+                    <span><input type="text" required name="expiry_date" placeholder="YYYY-MM"></span>
+                </li>
+
+            </ul>
+        </fieldset>
+        <input type="submit" value="Place Your Order">
+    </form>
+</body>
+
+</html>

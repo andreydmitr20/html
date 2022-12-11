@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+fieldset {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    padding: 0 0.4rem 0 0;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+legend {
+    margin-left: 1rem;
+    font-size: 1.2rem;
+}
+
+input[type="submit"] {
+    font-size: 0.8rem;
+    width: auto;
+}
+
+
+
+select,
+option,
+ul {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+
+span {
+    display: block;
+    overflow: hidden;
+}
+
+.li-text {
+    float: left;
+    margin-right: 0.5rem;
+
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    margin-bottom: 0.2rem;
+}
+
+ul {
+    margin-left: -1.3rem;
+}
+
+li {
+    list-style-type: none;
+}
