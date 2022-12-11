@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+
+
+
+        /* MENU */
+        .background_main {
+            background-color: rgb(126, 126, 227);
+            color: bisque;
+        }
+
+        nav ul {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: auto;
+            z-index: 10;
+        }
+
+        nav ul li {
+            display: inline-block;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+
+        /* nav a:hover {
+            background-color: white;
+            color: crimson;
+
+        } */
+
+        nav a:link {
+            color: white;
+        }
+
+        nav a:visited {
+            color: white;
+        }
+
+
+        /* CV */
+        #cv_photo {
+            height: 10rem;
+            /* float: left; */
+            margin-left: 2rem;
+            border-radius: 10rem;
+            /* align-self: center; */
+            /* border: 1px solid black; */
+        }
+
+        .div_lg {
+            border: 2px solid blue;
+        }
+
+        li {
+            color: white;
+        }
+
+        p,
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="task_1">
+        <nav>
+            <ul class="background_main">
+                <li><a href="#task_1">Menu:</a></li>
+                <li><a href="#task_2">CV</a></li>
+                <li><a href="#task_3">3</a></li>
+                <li><a href="#task_4">4</a></li>
+                <li><a href="#task_5">5</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="task_2">
+        <h1>CV</h1>
+        <div class="div_lg"></div>
+        <!-- <label for="cv_photo">Andrei Osetrov</label> -->
+        <table>
+            <tr>
+                <td>
+                    <p>Andrei Osetrov</p>
+                    <img id="cv_photo" src="img/cv_photo.jpg" alt="A photo for CV">
+
+                </td>
+                <td class="background_main">
+                    <h2>Skills</h2>
+                    <ul>
+                        <li>
+                            At the moment I am studying at the <a href="https://www.ucg.ac.me/etf">University of
+                                Montenegro
+                                (UCG)</a> for a back-end
+                            developer.
+                        </li>
+                        <li>
+                            I have finished the course “Introduction to programming, Python” at the <a
+                                href="https://www.ucg.ac.me/etf">UCG</a> and have
+                            writed two small pet projects on Python.
+                        </li>
+                        <li>
+                            Through SSH I am able to set up remote Linux VPS (for example, AWS t2.micro) with
+                            Docker compose, Selenoid, Jenkins. Two of my pet projects now are running on the AWS
+                            server.</li>
+                        <li>Using Gradle and Selenide library with Allure report I can write UI auto tests on Java (IDE
+                            IntelliJ IDEA community ed.). Reports can be sended to Telegram or Slack by a Jenkins
+                            task.</li>
+                        <li>I have a basic knowledge of how to write REST API tests on Java using RestAssured and
+                            Lombok for API testing.</li>
+                        <li>I used SQL within my projects with relational databases: Firebird (Interbase) and MySQL.
+                            Also I have used non-relational mongoDB with Python in one of my pet projects.
+                        </li>
+                        <li>I love Linux and can use sources, can change them and build under Linux.</li>
+                        <li>On C I can write embedded programs for some AVR and STM lines of Microprocessors.</li>
+                        <li>I am familiar with Qt application development for Windows and Linux.</li>
+
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="background_main">
+                    <h2>Languages</h2>
+                    <ul>
+                        <li>Russian: native.</li>
+                        <li>English: fluent technical reading, intermediate language speaker (A2).</li>
+                        <li>Montenegrin: in process.</li>
+                    </ul>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td class="background_main">
+                    <h2>Experience in programming</h2>
+                    <ul>
+                        <li>2022. I’ve made a <a href="https://github.com/andreydmitr20/flat_rent_scraper">flat rent
+                                scraper</a>
+                            and a <a href="https://github.com/andreydmitr20/find_a_job">job seeker</a> bot on Python.
+                        </li>
+                        <li>2022. I have written <a href="https://github.com/andreydmitr/unidragon">several UI autotests
+                                on
+                                Java</a>
+                            for site <a href="https://unidragon.ru/">Unidragon</a> using Selenide,
+                            Allure report and notification to Telegram by using Jenkins tasks.
+                        </li>
+                        <li>2021. I’ve created the program "Context" to analyze the effectiveness of Yandex Direct,
+                            GoogleAds advertising campaigns. For this program I used the Qt with C++ and a
+                            MySQL database.
+                        </li>
+                        <li>2017-2020. Several versions of the clay soil moisture sensor were produced by myself.
+                            From PCBs designed in Pcb-rnd to purchase components in China. From solder
+                            components to write code on C, program controllers and test them.
+                        </li>
+                        <li>2015-2020. I’ve made some small automation programs on C (and several parts on
+                            assembler) for AVR atmega328p and STMicroelectronics STM32F3 microcontrollers using
+                            NetBeans IDE and a plugin for C / C++. Examples: to control the lighting in the growing
+                            boxes, to control the lighting and the temperature inside a poultry house.
+                        </li>
+                    </ul>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="task_3">
+
+    </div>
+
+    <div id="task_4">
+
+    </div>
+    <div id="task_5">
+
+    </div>
+</body>
+
+</html>
