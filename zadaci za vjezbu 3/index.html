@@ -132,7 +132,7 @@
 
         /* JOB APPLICATION */
         #task_4 fieldset {
-            margin-bottom: 0.5rem;
+            margin: 0;
             font-size: 1rem;
             padding: 0;
             border: none;
@@ -141,76 +141,44 @@
         #task_4 p {
             text-align: left;
             font-size: 1.2rem;
+            margin: 0.8rem 0;
+        }
+
+        #task_4 h2 {
             margin: 0;
         }
 
-        #task_4 input:not([type="submit"]),
+        #task_4 table {
+            border-collapse: collapse;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #task_4 input:not([type="submit"]):not([type="radio"]),
         #task_4 select,
+        #task_4 table,
         #task_4 textarea {
             width: 100%;
             max-width: 30rem;
         }
 
-        #task_4 .ul_none {
-            list-style-type: none;
-            margin-left: -2.5rem;
-        }
-
-        #task_4 li {
-            text-align: left;
+        #task_4 div {
             margin-top: 0.5rem;
         }
 
-        .inline-block-text {
-            display: inline-block;
-            /* width: 100%; */
-        }
-
-        /* form {
-            border: 1px solid black;
-            color: blue;
-        } */
-        /* 
-
-       
-
-        legend {
-            font-size: 1.2rem;
-        }
-
-        input[type="submit"] {
-            font-size: 1rem;
-            width: auto;
-        }
-
-
-
-        select,
-        option,
-        ul {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
-        }
-
-
-        span {
+        #task_4 span label {
+            margin-top: 0.1rem;
+            margin-left: 0;
             display: block;
-            overflow: hidden;
         }
 
-        .li-text {
-            float: left;
-            margin-right: 0.5rem;
-            margin-left: -0.8rem;
-            color: black;
+        #task_4 span input {
+            margin-left: 0;
         }
 
-        input,
-        textarea,
-        select {
-            width: 100%;
-            margin-bottom: 0.2rem;
-        } */
+        #task_4 input[type="submit"] {
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 
@@ -417,79 +385,57 @@
         <h2>Job Application With Resume Upload</h2>
         <form method="get" action="#">
             <fieldset>
-                <!-- <legend>Contact Information</legend> -->
                 <p>Contact Information</p>
-                <ul class="ul_none">
-                    <li class="inline-block-text">
-                        <div>First Name *</div>
-                        <span><input type="text" name="first_name" required></span>
-                    </li>
-                    <li class="inline-block-text">
-                        <div>Last Name *</div>
-                        <span><input type="text" name="last_name" required></span>
-                    </li>
-                    <li>
-                        <div class="li-text">Email *</div>
-                        <span><input type="email" name="email" required></span>
-                    </li>
-                    <li>
-                        <div class="li-text">Phone *</div>
-                        <span><input type="text" name="phone"></span>
-                    </li>
-                </ul>
+                <table>
+                    <tr>
+                        <td>
+                            First Name *
+                            <input type="text" name="first_name" required>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            Last Name *
+                            <input type="text" name="last_name" required>
+
+                        </td>
+                    </tr>
+                </table>
+                <div>Email *</div>
+                <input type="email" name="email" required>
+                <div>Phone *</div>
+                <input type="text" name="phone">
             </fieldset>
             <fieldset>
-                <!-- <legend>Position</legend> -->
                 <p>Position</p>
-                <ul class="ul_none">
-                    <li>
-                        <div class="li-text">Position you are applying for *</div>
-                        <span><select size="1" name="country" required>
-                                <option value="">None</option>
-                                <option value="Backend NodeJS" selected>Backend NodeJS</option>
-                                <option value="Backend Python">Backend Python</option>
-                                <option value="Dentist" disabled>Dentist</option>
-                                <option value="Frontend React">Frontend React</option>
-                                <option value="Frontend Angular">Frontend Angular</option>
-                            </select>
-                        </span>
-                    </li>
-
-                    <li>
-                        <div class="li-text">Resume upload</div>
-                        <span><input type="file" name="resume"></span>
-                    </li>
-                    <li>
-                        <div class="li-text">Portfolio website</div>
-                        <span><input type="url" name="website"></span>
-                    </li>
-
-                    <li>
-                        <div class="li-text">Salary Requirements</div>
-                        <span><input type="number" name="salary"></span>
-                    </li>
-                    <li>
-                        <div class="li-text">When can you start?</div>
-                        <span><input type="text" name="when_start"></span>
-                    </li>
-                    <li>
-                        <div class="li-text">Are you willing to relocate?</div>
-                        <!-- <span> -->
-                        <label><input type="radio" name="relocate" value="yes">Yes</label>
-                        <label><input type="radio" name="relocate" value="no">No</label>
-                        <label><input type="radio" name="relocate" value="not sure">Not sure</label>
-
-                        <!-- </span> -->
-                    </li>
-                    <li>
-                        <div class="li-text">Last company you worked for</div>
-                        <span><input type="text" name="last_company"></span>
-                    </li>
-                    <li>
-                        <div class="li-text">Comments</div>
-                        <span><textarea name="comments" required></textarea></span>
-                    </li>
-                </ul>
+                <div>Position you are applying for *</div>
+                <span><select size="1" name="country" required>
+                        <option value="">None</option>
+                        <option value="Backend NodeJS" selected>Backend NodeJS</option>
+                        <option value="Backend Python">Backend Python</option>
+                        <option value="Dentist" disabled>Dentist</option>
+                        <option value="Frontend React">Frontend React</option>
+                        <option value="Frontend Angular">Frontend Angular</option>
+                    </select>
+                </span>
+                <div>Resume upload</div>
+                <input type="file" name="resume">
+                <div>Portfolio website</div>
+                <input type="url" name="website">
+                <div>Salary Requirements</div>
+                <input type="number" name="salary">
+                <div>When can you start?</div>
+                <input type="text" name="when_start">
+                <div>Are you willing to relocate?</div>
+                <span>
+                    <label><input type="radio" name="relocate" value="yes">Yes</label>
+                    <label><input type="radio" name="relocate" value="no">No</label>
+                    <label><input type="radio" name="relocate" value="not sure">Not sure</label>
+                </span>
+                <div>Last company you worked for</div>
+                <input type="text" name="last_company">
+                <div>Comments</div>
+                <textarea name="comments"></textarea>
             </fieldset>
 
             <input type="submit" value="Submit">
