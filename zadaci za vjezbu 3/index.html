@@ -12,7 +12,7 @@
         }
 
         .div_lg {
-            margin: 2rem 0;
+            margin-bottom: 4rem;
             border: 2px solid blue;
         }
 
@@ -24,7 +24,7 @@
         #task_1 nav ul {
             position: fixed;
             top: 0;
-            right: 0;
+            left: 0;
             margin-right: 1rem;
             padding: 0.2rem;
             width: auto;
@@ -42,12 +42,7 @@
         }
 
 
-        /* #task1 nav a:hover {
-            background-color: white;
-            color: crimson;
-            font-weight: bold;
-            border:1px solid black;
-        }  */
+
 
         #task_1 nav a:link {
             color: white;
@@ -68,6 +63,7 @@
         #task_2 .background_main {
             background-color: rgb(212, 226, 242);
             color: black;
+            vertical-align: top;
         }
 
 
@@ -81,6 +77,9 @@
             margin-right: auto;
         }
 
+        #task_2 table {
+            max-width: 40rem;
+        }
 
         #task_2 li {
             color: black;
@@ -113,18 +112,16 @@
             border-collapse: collapse;
             border-radius: 10px;
             border: none;
-            /* padding:0; */
+            max-width: 40rem;
         }
 
         #task_3 .table_img {
-            /* height: rem; */
+            height: 4rem;
             object-fit: contain;
-            /* padding:0.4rem; */
         }
 
         #task_3 tbody tr {
             border-top: 1px solid rgb(255, 153, 0);
-            /* margin:0; */
             padding: 0;
         }
 
@@ -234,10 +231,9 @@
     <div id="task_1">
         <nav>
             <ul class="background_main">
-                <li><a href="#task_2">CV<br><br><br></a></li>
-                <li><a href="#task_3">Favourite<br>
-                        Films<br>List</a></li>
-                <li><a href="#task_4">Job<br>Application<br><br></a></li>
+                <li><a href="#task_2">CV</a></li>
+                <li><a href="#task_3">Favourite Films List</a></li>
+                <li><a href="#task_4">Job Application</a></li>
             </ul>
         </nav>
     </div>
