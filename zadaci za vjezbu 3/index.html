@@ -11,72 +11,83 @@
             box-sizing: border-box;
         }
 
-
+        .div_lg {
+            margin: 2rem 0;
+            border: 2px solid blue;
+        }
 
 
 
 
         /* MENU */
-        .background_main {
+
+        #task_1 nav ul {
+            position: fixed;
+            top: 0;
+            right: 0;
+            margin-right: 1rem;
+            padding: 0.2rem;
+            width: auto;
+            z-index: 10;
+            border: 2px double white;
+            border-radius: 15px;
             background-color: rgb(126, 126, 227);
             color: bisque;
         }
 
-        nav ul {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: auto;
-            z-index: 10;
-            border: 2px double white;
-        }
-
-        nav ul li {
+        #task_1 nav ul li {
             display: inline-block;
             overflow: hidden;
             margin: 10px;
         }
 
 
-        /* nav a:hover {
+        /* #task1 nav a:hover {
             background-color: white;
             color: crimson;
+            font-weight: bold;
+            border:1px solid black;
+        }  */
 
-        } */
+        #task_1 nav a:link {
+            color: white;
+            text-decoration: none;
+        }
 
-        nav a:link {
+        #task_1 nav a:visited {
             color: white;
         }
 
-        nav a:visited {
-            color: white;
-        }
+
+
+
 
 
         /* CV */
-        #cv_photo {
+
+        #task_2 .background_main {
+            background-color: rgb(212, 226, 242);
+            color: black;
+        }
+
+
+        #task_2 #cv_photo {
             height: 10rem;
-            /* float: left; */
             margin-left: 2rem;
             border-radius: 10rem;
-            /* align-self: center; */
-            /* border: 1px solid black; */
         }
 
-        .div_lg {
-            border: 2px solid blue;
-        }
 
         #task_2 li {
-            color: white;
+            color: black;
         }
 
         #task_2 a {
-            color: white;
+            color: blue;
         }
 
-        p,
-        h3 {
+        #task_2 p,
+        #task_2 h3 {
             text-align: center;
             font-size: 1.5rem;
         }
@@ -91,35 +102,37 @@
         /* Favourite Films list */
         #task_3 table {
             border-collapse: collapse;
+            border-radius: 10px;
+            border: none;
         }
 
-        .table_img {
+        #task_3 .table_img {
             height: 8rem;
         }
 
-        .background_table {
+        #task_3 .background_table {
             background-color: rgb(229, 209, 167);
             color: rgb(3, 5, 52);
         }
 
-        .table_caption {
+        #task_3 .table_caption {
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
         }
 
-        .film_table,
-        .film_table td {
+        #task_3 .film_table,
+        #task_3 .film_table td {
             border: solid 1px black;
             text-align: center;
         }
 
-        .col_description {
+        #task_3 .col_description {
             width: 50%;
             background-color: antiquewhite;
         }
 
-        .col_name {
+        #task_3 .col_name {
             width: 20%;
             background-color: rgb(239, 201, 112);
         }
@@ -186,26 +199,22 @@
     <div id="task_1">
         <nav>
             <ul class="background_main">
-                <li><a href="#task_1">Top</a></li>
-                <li><a href="#task_2">CV</a></li>
-                <li><a href="#task_3">Favourite Films List</a></li>
-                <li><a href="#task_4">Job Application</a></li>
-                <li><a href="#task_5">5</a></li>
+                <li><a href="#task_2">CV<br><br><br></a></li>
+                <li><a href="#task_3">Favourite<br>
+                        Films<br>List</a></li>
+                <li><a href="#task_4">Job<br>Application<br><br></a></li>
             </ul>
         </nav>
     </div>
 
     <div id="task_2">
-        <h2>CV</h2>
         <div class="div_lg"></div>
-        <br>
+
         <table>
             <tr>
                 <td>
-                    <p><strong>Andrei Osetrov</strong></p>
-                    <br>
+                    <h2><strong>CV<br>Andrei<br>Osetrov</strong></h2>
                     <img id="cv_photo" src="img/cv_photo.jpg" alt="A photo for CV">
-
                 </td>
                 <td class="background_main">
                     <h3>Skills</h3>
@@ -291,9 +300,7 @@
     </div>
 
     <div id="task_3">
-        <br>
         <div class="div_lg"></div>
-        <br>
         <table class="film_table background_table">
             <thead>
                 <tr>
@@ -379,9 +386,7 @@
     </div>
 
     <div id="task_4">
-        <br>
         <div class="div_lg"></div>
-        <br>
         <h2>Job Application With Resume Upload</h2>
         <form method="get" action="#">
             <fieldset>
@@ -397,14 +402,13 @@
                         <td>
                             Last Name *
                             <input type="text" name="last_name" required>
-
                         </td>
                     </tr>
                 </table>
                 <div>Email *</div>
                 <input type="email" name="email" required>
                 <div>Phone *</div>
-                <input type="text" name="phone">
+                <input type="text" name="phone" required>
             </fieldset>
             <fieldset>
                 <p>Position</p>
@@ -435,7 +439,7 @@
                 <div>Last company you worked for</div>
                 <input type="text" name="last_company">
                 <div>Comments</div>
-                <textarea name="comments"></textarea>
+                <textarea rows="5" name="comments"></textarea>
             </fieldset>
 
             <input type="submit" value="Submit">
