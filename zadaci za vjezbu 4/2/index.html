@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 100px;
+            grid-auto-rows: 100px;
+            grid-template-areas:
+                "header header header"
+                "content content sidebar"
+                "footer footer footer";
+            grid-gap: 10px;
+            place-items: center;
+        }
+
+        .grid div {
+            background: red;
+            text-align: center;
+            line-height: 3rem;
+            color: #fff;
+            border: 1px solid gray;
+        }
+
+        body {
+            height: 300px;
+            /* background-image: url(grass.jpeg), url(prod.jpeg);
+            background-position: top left, bottom right;
+            background-repeat: no-repeat, no-repeat;
+            background-size: contain;
+             */
+            background-image: linear-gradient(to right, red, blue);
+        }
+
+        @keyframes changeColor {
+            0% {
+                color: blue
+            }
+
+            50% {
+                color: limegreen
+            }
+
+            100% {
+                color: yellow
+            }
+        }
+
+        .kf:hover {
+            animation: changeColor 3s linear;
+        }
+    </style>
+</head>
+<div class="grid">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+</div>
+<div class="kf">kddfqfweqfqff</div>
+
+<body>
+
+</body>
+
+</html>

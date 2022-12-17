@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task 1</title>
     <style>
         * {
             box-sizing: border-box;
@@ -133,10 +133,10 @@
             color: black;
         }
 
-        #row .col-item p::first-letter,
+        /* #row .col-item p::first-letter,
         #row .col-item h3::first-letter {
             margin-left: 2rem;
-        }
+        } */
 
         #row .col-item ul {
             list-style-type: none;
@@ -155,8 +155,24 @@
         #row .prod-item {
             flex: auto;
             height: 100%;
+
+            display: flex;
+            flex-flow: row nowrap;
+
             padding: 0.2rem;
             margin-bottom: 1rem;
+        }
+
+        #row .prod-item-img {
+            flex: auto;
+
+            align-self: flex-start;
+            margin: 0 1rem 0 0;
+            border-radius: 0.2rem;
+        }
+
+        #row .prod-item-content {
+            flex: auto;
         }
 
         /* product item style */
@@ -167,12 +183,6 @@
 
         #row .prod-item p {
             margin: 0;
-        }
-
-        #row .prod-item-img {
-            float: left;
-            margin: 0 1rem 0 0;
-            border-radius: 0.2rem;
         }
 
 
@@ -240,7 +250,6 @@
             <span>Some text</span>
         </div>
     </div>
-
 
 
 
