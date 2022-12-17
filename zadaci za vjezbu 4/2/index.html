@@ -55,6 +55,21 @@
         .kf:hover {
             animation: changeColor 3s linear;
         }
+
+
+        :root {
+            --theme: black;
+        }
+
+        .container {
+            background: var(--theme);
+        }
+
+        @media(max-width: 360px) {
+            :root {
+                --theme: white;
+            }
+        }
     </style>
 </head>
 <div class="grid">
