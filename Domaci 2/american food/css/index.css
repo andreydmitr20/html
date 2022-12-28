@@ -10,8 +10,8 @@
   --fg-main-color: rgba(73, 26, 2, 255);
   --fg-logo-color: rgba(66, 32, 11, 255);
 
-  --font-sans-serif: sans-serif;
-  --font-sans: serif;
+  --font-sans-serif: Saira Condensed, sans-serif;
+  --font-serif: Alfa Slab One, serif;
 }
 
 body {
@@ -63,6 +63,8 @@ logo
   padding: 0;
   /* margin-left: 0.2rem; */
   /* padding-left: 1rem; */
+  transform: scaleX(0.9);
+  transform: scaleY(1.3);
 }
 
 /* 
