@@ -3,8 +3,12 @@
 }
 
 :root {
-  --bg-main-color: rgba(255, 196, 82, 255);
-  --fg-main-color: rgba(61, 37, 20, 255);
+  /* --bg-main-color: rgba(255, 196, 82, 255);
+  --fg-main-color: rgba(61, 37, 20, 255); */
+
+  --bg-main-color: rgba(255, 194, 25, 255);
+  --fg-main-color: rgba(73, 26, 2, 255);
+  --fg-logo-color: rgba(66, 32, 11, 255);
 
   --font-sans-serif: sans-serif;
   --font-sans: serif;
@@ -51,7 +55,7 @@ logo
 }
 
 .logo-text {
-  color: var(--fg-main-color);
+  color: var(--fg-logo-color);
 
   font-family: var(--font-sans-serif);
   font-size: 1.8rem;
@@ -78,6 +82,8 @@ express delivery
 .delivery-img {
   flex: auto;
   object-fit: contain;
+  /* filter: invert(); */
+  /* color: white; */
 }
 
 .delivery-text {
