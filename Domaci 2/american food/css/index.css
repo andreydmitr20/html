@@ -11,6 +11,9 @@
 
   --bg-gr1-color: rgba(255, 194, 25, 255);
   --bg-gr2-color: rgba(255, 255, 255, 255);
+
+  --order-btn-bg-color: rgba(255, 0, 0, 255);
+  --order-btn-fg-color: rgba(255, 255, 255, 255);
 }
 
 /* responsive debug */
@@ -41,6 +44,14 @@ flex
 .f-row {
   display: flex;
   flex-flow: row wrap;
+
+  row-gap: 0;
+  column-gap: 0;
+}
+
+.f-row-nowrap {
+  display: flex;
+  flex-flow: row nowrap;
 
   row-gap: 0;
   column-gap: 0;
@@ -324,7 +335,7 @@ try it
 
 .gr2 .try_col1 p:nth-of-type(2) {
   position: absolute;
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-family: var(--font-sans-serif);
   font-weight: bold;
   color: var(--bg-gr2-color);
@@ -382,7 +393,7 @@ try it
 
 .gr2 .try_col2 p:nth-of-type(2) {
   position: absolute;
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-family: var(--font-sans-serif);
   font-weight: bold;
   color: var(--bg-gr2-color);
@@ -393,4 +404,90 @@ try it
   top: 7vw;
   left: 5vw;
   /* border: var(--debug-border); */
+}
+
+/*****************
+
+group 3
+
+*/
+.gr3 {
+  background-color: var(--bg-gr2-color);
+
+  text-align: center;
+  margin: 0;
+  border: var(--debug-border);
+}
+
+.gr3 .always p:nth-child(1) {
+  margin: 0 auto;
+  text-transform: uppercase;
+  font-family: var(--font-sans-serif);
+  background-color: var(--bg-gr1-color);
+  color: var(--fg-logo-color);
+
+  font-size: 2vw;
+  width: 20vw;
+}
+.gr3 .always p:nth-child(2) {
+  text-transform: uppercase;
+  font-family: var(--font-serif);
+  color: var(--fg-main-color);
+
+  font-size: 4vw;
+  width: 40vw;
+  margin: 1vw auto;
+}
+.gr3 .always p:nth-child(3) {
+  font-family: var(--font-sans-serif);
+  color: var(--fg-main-color);
+
+  font-size: 2vw;
+  margin: 1vw auto;
+}
+
+.gr3 .choose {
+  flex: auto;
+  width: 30vw;
+
+  /* border: var(--debug-border); */
+}
+
+.gr3 img {
+  margin: 0;
+
+  width: 30vw;
+  border-radius: 2vw;
+}
+
+.gr3 .choose p:nth-child(2) {
+  margin: 0 auto;
+  text-transform: uppercase;
+  font-family: var(--font-sans-serif);
+  color: var(--fg-logo-color);
+  /* border: var(--debug-border); */
+  font-weight: bold;
+
+  font-size: 2.2vw;
+}
+.gr3 .choose p:nth-child(3) {
+  margin: 0;
+  font-family: var(--font-sans-serif);
+  color: var(--fg-logo-color);
+  /* border: var(--debug-border); */
+
+  font-size: 2vw;
+  padding: 0.3vw;
+}
+
+.gr3 button {
+  background-color: var(--order-btn-bg-color);
+  color: var(--order-btn-fg-color);
+  /* font-weight: bold; */
+  font-family: var(--font-serif);
+  border: none;
+
+  font-size: 1.5vw;
+  padding: 1vw 2vw;
+  margin: 2vw 0 2vw 0;
 }
