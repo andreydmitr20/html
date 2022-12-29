@@ -573,3 +573,162 @@ group 4
   background-color: var(--circle-active-color);
   /* border: var(--debug-border); */
 }
+
+/*****************
+
+group 5
+
+*/
+.gr5 {
+  background-color: var(--bg-gr2-color);
+
+  /* text-align: left; */
+  margin: 8vw 2vw 0 4vw;
+  /* border: var(--debug-border); */
+}
+
+.gr5 .col {
+  flex: auto;
+
+  /* border: var(--debug-border); */
+  position: relative;
+}
+
+.gr5 .col:nth-child(1) {
+  /* border: var(--debug-border); */
+  /* overflow: hidden; */
+
+  width: 20vw;
+}
+
+.gr5 .col:nth-child(1) img:first-of-type {
+  /* border: var(--debug-border); */
+  position: absolute;
+
+  top: -3vw;
+  left: -6vw;
+  width: 15vw;
+}
+
+.gr5 .col:nth-child(1) img:last-of-type {
+  /* border: var(--debug-border); */
+  position: absolute;
+
+  top: 10vw;
+  left: 10vw;
+  width: 6vw;
+}
+
+/*-------------*/
+.gr5 .col:nth-child(2) {
+  /* border: var(--debug-border); */
+
+  width: 59vw;
+}
+
+.gr5 .col:nth-child(2) p:nth-of-type(1) {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-family: var(--font-sans-serif);
+  color: var(--fg-logo-color);
+  /* border: var(--debug-border); */
+  font-weight: bold;
+  text-align: center;
+
+  font-size: 2.2vw;
+}
+
+.gr5 .col:nth-child(2) p:nth-of-type(2) {
+  padding: 0;
+  text-transform: uppercase;
+  font-family: var(--font-serif);
+  color: var(--fg-main-color);
+  text-align: center;
+  /* border: var(--debug-border); */
+
+  font-size: 3vw;
+  margin: 0 0 2vw 0;
+}
+
+.gr5 form {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+
+.gr5 .form-col:nth-child(odd) {
+  flex: auto;
+  width: 49%;
+  /* border: var(--debug-border); */
+}
+.gr5 .form-col:nth-child(even) {
+  flex: auto;
+  width: 2%;
+  /* border: var(--debug-border); */
+}
+
+.gr5 input {
+  border: none;
+  background-color: var(--bg-gr1-color);
+  width: 100%;
+  font-family: var(--font-sans-serif);
+  color: var(--fg-logo-color);
+
+  border-radius: 0.5vw;
+  font-size: 2vw;
+  height: 5vw;
+  margin: 1.5vw 0 0 0;
+  padding: 1vw;
+}
+
+.gr5 input[type="submit"] {
+  color: var(--order-btn-fg-color);
+  background-color: var(--order-btn-bg-color);
+}
+
+.gr5 input[type="submit"]:hover {
+  cursor: pointer;
+}
+
+/* .gr5 button {
+  border: none;
+  width: 100%;
+  font-family: var(--font-sans-serif);
+  color: var(--order-btn-fg-color);
+  background-color: var(--order-btn-bg-color);
+  vertical-align: middle;
+
+  font-size: 2vw;
+  height: 5vw;
+  margin: 2vw 0 0 0;
+  padding: 1vw;
+} */
+
+/*-------------*/
+.gr5 .col:nth-child(3) {
+  /* border: var(--debug-border); */
+
+  width: 20vw;
+}
+
+.gr5 .col:nth-child(3) img:first-of-type {
+  /* border: var(--debug-border); */
+  position: absolute;
+
+  top: 13vw;
+  right: -12vw;
+  width: 30vw;
+}
+/*****************
+
+group 6
+
+*/
+.gr6 {
+  background-color: var(--bg-gr2-color);
+
+  /* text-align: left; */
+  margin: 4vw 2vw 0 4vw;
+  /* border: var(--debug-border); */
+}
