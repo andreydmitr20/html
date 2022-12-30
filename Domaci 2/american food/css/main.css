@@ -24,20 +24,10 @@
     hue-rotate(315deg) brightness(103%) contrast(102%);
   --logo-svg-to-fg-logo-color: invert(12%) sepia(66%) saturate(1139%)
     hue-rotate(352deg) brightness(89%) contrast(94%);
-
+  /* does not work in @media
   --media-m: 961px;
   --media-s: 320px;
-}
-
-/* responsive debug */
-#res {
-  display: block;
-  display: none;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 10px;
-  height: 10px;
+  */
 }
 
 * {
@@ -74,5 +64,60 @@ body {
 .f-x-justify-edge {
   width: 100%;
   justify-content: space-between;
-  border: var(--debug-border);
+}
+
+/* responsive debug */
+#res {
+  display: block;
+  /* display: none; */
+
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  /* border: var(--debug-border); */
+}
+/*
+
+animation
+
+*/
+@keyframes anim_tilting {
+  0%,
+  100% {
+    transform: rotateZ(0deg) translate(0, 0%);
+  }
+
+  25% {
+    transform: rotateZ(10deg) translate(1rem, 0%);
+  }
+
+  50% {
+    transform: rotateZ(0deg) translate(0, 0%);
+  }
+
+  75% {
+    transform: rotateZ(-10deg) translate(-1rem, 0%);
+  }
+}
+
+@keyframes anim_color {
+  0%,
+  100% {
+    background-color: var(--bg-gr1-color);
+  }
+  50% {
+    background-color: var(--bg-gr2-color);
+  }
+}
+
+@keyframes anim_press {
+  from {
+    transform: scale(50%);
+  }
+  to {
+    transform: scale(100%);
+  }
 }
