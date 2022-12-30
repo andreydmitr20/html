@@ -5,32 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>BURGER HOUSE</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa Slab One|Saira Condensed">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa%20Slab%20One%7cSaira%20Condensed">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/index.css">
 
 </head>
 
-<>
+<body>
     <div id="res"></div>
 
     <div class="gr1 f-row">
         <div class="f-row f-x-justify-edge">
 
             <div class="logo">
-                <div>
-                    <img class="logo-img" src="img/icon_burger-removebg.png" alt="logo">
-                </div>
-                <h1 class="logo-text"><strong>BURGER&nbsp;HOUSE</strong></h1>
+                <img src="img/burger-logo.svg" alt="logo">
+                <h1><strong>BURGER&nbsp;HOUSE</strong></h1>
             </div>
 
             <div class="delivery">
-                <div>
-                    <img class="delivery-img" src="img/icon_moto-removebg.png" alt="motorcycle">
-                </div>
-                <p class="delivery-text">
+                <img src="img/scooter.svg" alt="scooter">
+                <p>
                     <strong>
-                        <a class="tel" href="tel:+1 234 567 890">
-                            Express Delivery +1 234 567 890
+                        <a class="tel" href="tel:+1%20234%20567%20890">
+                            <strong>Express Delivery +1 234 567 890</strong>
                         </a>
                     </strong>
                 </p>
@@ -38,10 +35,10 @@
         </div>
 
         <ul class="navbar">
-            <li><a class="navbar-element" href="#">HOME</a></li>
+            <li><a class="navbar-element" href="index.html">HOME</a></li>
             <li><a class="navbar-element" href="html/menu.html">MENU</a></li>
             <li><a class="navbar-element" href="html/our_story.html">OUR STORY</a></li>
-            <li><a class="navbar-element" href="tel:+1 234 567 890">CONTACT US</a></li>
+            <li><a class="navbar-element" href="tel:+1%20234%20567%20890">CONTACT US</a></li>
         </ul>
 
         <div class="center-area-col">
@@ -102,19 +99,25 @@
                 <img src="img/burger1.png" alt="burger 1">
                 <p>Lorem ipsum dolor</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit</p>
-                <button action="">ORDER NOW</button>
+                <form action="html/menu.html" method="get">
+                    <input type="submit" name="order_burger_1" value="ORDER NOW">
+                </form>
             </div>
             <div class="choose">
                 <img src="img/burger2.png" alt="burger 1">
                 <p>Lorem ipsum dolor</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit</p>
-                <button action="">ORDER NOW</button>
+                <form action="html/menu.html" method="get">
+                    <input type="submit" name="order_burger_2" value="ORDER NOW">
+                </form>
             </div>
             <div class="choose">
                 <img src="img/burger1.png" alt="burger 1">
                 <p>Lorem ipsum dolor</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit</p>
-                <button action="">ORDER NOW</button>
+                <form action="html/menu.html" method="get">
+                    <input type="submit" name="order_burger_3" value="ORDER NOW">
+                </form>
             </div>
         </div>
     </div>
@@ -173,11 +176,53 @@
         </div>
     </div>
 
+    <div class="gr6 ">
 
+        <img class="bg-img" src="img/footer.jpg" alt="footer picture">
 
+        <div class="fg-row f-row-nowrap">
+            <div class="col">
+
+                <div class="logo">
+                    <img src="img/burger-logo.svg" alt="logo">
+                    <p><strong>BURGER&nbsp;HOUSE</strong></p>
+                </div>
+
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit assumenda exercitationem dolor
+                    sapiente
+                    deleniti. Deserunt ipsum sunt ab adipisci, eveniet quam neque nobis at iure rerum eaque
+                    necessitatibus
+                    iste jkhjhj
+                    voluptates?</p>
+                <p>
+                    &copy;&nbsp;Copyright&nbsp;2022.
+
+                    All rights reserved.
+                </p>
+            </div>
+            <div class="col">
+                <div class="address">
+                    <img src="img/burger-marker.svg" alt="address">
+                    <p><strong>MAIN ROAD, BUILDING NAME, COUNTRY</strong></p>
+                </div>
+                <div class="email">
+                    <img src="img/letter.svg" alt="letter">
+                    <p><strong>info@companyname.com</strong></p>
+                </div>
+                <div class="msg">
+                    <img src="img/msg_instagram.svg" alt="instagram">
+                    <img src="img/msg_facebook.svg" alt="facebook">
+                    <img src="img/msg_twitter.svg" alt="twitter">
+                    <img src="img/msg_whatsapp.svg" alt="whatsapp">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- script -->
+    <script src="js/main.js"></script>
     <script src="js/index.js"></script>
-    </body>
+</body>
 
 </html>
