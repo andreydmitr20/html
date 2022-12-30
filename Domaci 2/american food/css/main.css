@@ -39,49 +39,35 @@ body {
   padding: 0 0 0 0;
 }
 
-/*
-  
-  flex
-  
-  */
-
-.f-row {
-  display: flex;
-  flex-flow: row wrap;
-
-  row-gap: 0;
-  column-gap: 0;
-}
-
-.f-row-nowrap {
-  display: flex;
-  flex-flow: row nowrap;
-
-  row-gap: 0;
-  column-gap: 0;
-}
-
-.f-x-justify-edge {
-  width: 100%;
-  justify-content: space-between;
-}
-
 /* responsive debug */
-#res {
+.res {
   display: block;
-  /* display: none; */
+  display: none;
+  /* border: var(--debug-border); */
 
   z-index: 20;
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* position: relative; */
+  /* top: 0; */
   width: 10px;
   height: 10px;
-  /* border: var(--debug-border); */
 }
-/*
+.res.l {
+  background-color: red;
+  /* left: 30; */
+}
+.res.m {
+  background-color: green;
+  /* left: 20; */
+}
+.res.s {
+  background-color: blue;
+  /* left: 10; */
+}
+/**********
 
-animation
+
+A N I M A T I O N
+
 
 */
 @keyframes anim_tilting {
@@ -103,6 +89,7 @@ animation
   }
 }
 
+/**********/
 @keyframes anim_color {
   0%,
   100% {
@@ -113,6 +100,7 @@ animation
   }
 }
 
+/************/
 @keyframes anim_press {
   from {
     transform: scale(50%);
