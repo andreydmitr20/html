@@ -5,6 +5,7 @@ group 1
 */
 .gr1 {
   background-color: var(--bg-gr1-color);
+  margin: 0 0 0 0;
 }
 
 /*
@@ -41,29 +42,24 @@ logo
 
   font-size: 3vw;
 }
-/* 
 
-express delivery
-
-*/
 .gr1 .delivery {
-  flex: auto;
-
   display: flex;
   flex-flow: row nowrap;
+  /* width: 100%; */
   justify-content: flex-end;
   align-items: center;
-  border: var(--debug-border);
 
-  margin: 2vw 0 0 0;
+  z-index: 13;
+  /* border: var(--debug-border); */
 }
 
 .gr1 .delivery img {
   flex: auto;
-  object-fit: contain;
+  /* object-fit: contain; */
   filter: var(--svg-black-to-white);
 
-  width: 1vw;
+  width: 5vw;
 }
 
 .gr1 .delivery p,
@@ -202,13 +198,10 @@ group 2
 */
 .gr2 {
   background-color: var(--bg-gr2-color);
+  border: var(--debug-border);
+  margin: 0 0 0 0;
 }
 
-/*
-
-try it
-
-*/
 .gr2 .try_col1 {
   flex: auto;
   position: relative;
@@ -315,10 +308,10 @@ group 3
 */
 .gr3 {
   background-color: var(--bg-gr2-color);
-
   text-align: center;
-  margin: 0 2vw;
-  /* border: var(--debug-border); */
+  border: var(--debug-border);
+
+  margin: 0 0 0 0;
 }
 
 .gr3 .always p:nth-child(1) {
@@ -345,7 +338,7 @@ group 3
   color: var(--fg-main-color);
 
   font-size: 2vw;
-  margin: 1vw auto;
+  margin: 1vw 3vw;
 }
 
 .gr3 .choose {
@@ -405,10 +398,10 @@ group 4
 */
 .gr4 {
   background-color: var(--bg-gr2-color);
-
   text-align: left;
-  margin: 4vw 2vw 0 8vw;
-  /* border: var(--debug-border); */
+  border: var(--debug-border);
+
+  margin: 4% 0 0 0;
 }
 
 .gr4 .col {
@@ -420,11 +413,11 @@ group 4
 
 .gr4 img {
   width: 45vw;
-  margin: 0 4vw;
+  margin: 0 0 0 0;
 }
 
 .gr4 p:nth-of-type(1) {
-  margin: 0;
+  margin: 0 0 1% 4%;
   padding: 0;
   text-transform: uppercase;
   font-family: var(--font-sans-serif);
@@ -436,7 +429,7 @@ group 4
 }
 
 .gr4 p:nth-of-type(2) {
-  margin: 0;
+  margin: 0 0 0 4%;
   padding: 0;
   text-transform: uppercase;
   font-family: var(--font-serif);
@@ -451,11 +444,12 @@ group 4
   color: var(--fg-logo-color);
 
   font-size: 2vw;
-  margin: 1vw auto;
+  margin: 4% 0 0 4%;
 }
 .gr4 .circles {
   position: absolute;
-  bottom: 1vw;
+  bottom: 4%;
+  margin: 0 0 0 4%;
 }
 
 .gr4 .circle {
@@ -481,9 +475,9 @@ group 5
 .gr5 {
   background-color: var(--bg-gr2-color);
 
-  /* text-align: left; */
-  margin: 8vw 2vw 0 4vw;
-  /* border: var(--debug-border); */
+  margin: 8% 0 0 0;
+  /* padding: 0 0 15% 0; */
+  border: var(--debug-border);
 }
 
 .gr5 .col {
@@ -592,9 +586,11 @@ group 5
 
 /*-------------*/
 .gr5 .col:nth-child(3) {
+  /* display: none; */
   /* border: var(--debug-border); */
-
+  /* overflow: hidden; */
   width: 20vw;
+  padding: 0 0 12% 0;
 }
 
 .gr5 .col:nth-child(3) img:first-of-type {
@@ -613,7 +609,7 @@ group 6
 */
 .gr6 {
   text-align: left;
-  /* border: var(--debug-border); */
+  border: var(--debug-border);
   position: relative;
 
   margin: 14% 0 0 0;
@@ -698,7 +694,7 @@ group 6
   /* border: var(--debug-border); */
 
   position: absolute;
-  bottom: -4vw;
+  top: 50%;
 }
 .gr6 .address img {
   flex: auto;
@@ -715,7 +711,8 @@ group 6
   color: var(--bg-gr2-color);
   font-family: var(--font-sans-serif);
   font-weight: bold;
-  font-size: 2vw;
+
+  font-size: 1.5vw;
   /* border: var(--debug-border); */
 }
 
@@ -727,7 +724,7 @@ group 6
   align-items: center;
   /* border: var(--debug-border); */
   position: absolute;
-  bottom: 0;
+  top: 80%;
 }
 .gr6 .email img {
   flex: auto;
@@ -745,7 +742,7 @@ group 6
   font-weight: bold;
   /* border: var(--debug-border); */
 
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 .gr6 .msg {
@@ -758,14 +755,40 @@ group 6
   bottom: -12vw;
   right: 5vw;
 }
-.gr6 .msg img {
+.gr6 .msg div {
   flex: auto;
+  background-color: var(--bg-gr2-color);
+  /* filter: var(--svg-black-to-white); */
+  position: relative;
 
-  filter: var(--svg-black-to-white);
+  border-radius: 1vw;
   width: 2vw;
+  height: 2vw;
   margin: 1vw;
 }
-/********************/
+.gr6 .msg img {
+  /* flex: auto; */
+  position: absolute;
+  top: 0.2vw;
+  left: 0.2vw;
+
+  width: 1.6vw;
+}
+
+.gr6 .msg a:hover {
+  cursor: pointer;
+}
+/**********
+
+
+
+
+
+
+
+
+
+**********/
 /*
 
 
