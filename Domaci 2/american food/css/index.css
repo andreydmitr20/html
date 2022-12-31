@@ -525,9 +525,9 @@
 .gr6 .msg img {
   position: absolute;
 }
-.gr6 .msg img:hover {
+/* .gr6 .msg img:hover {
   animation: 0.3s ease-in-out anim_tilting 2;
-}
+} */
 .gr6 .msg a:hover {
   cursor: pointer;
 }
@@ -1571,18 +1571,7 @@ S M A L L
     margin: 8% 0 0 0;
   }
   .gr5 .col:nth-child(1) {
-    width: 0vw;
     display: none;
-  }
-  .gr5 .col:nth-child(1) img:first-of-type {
-    top: 70vw;
-    left: -6vw;
-    width: 15vw;
-  }
-  .gr5 .col:nth-child(1) img:last-of-type {
-    top: 50vw;
-    left: 10vw;
-    width: 6vw;
   }
 
   /*-------------*/
@@ -1619,97 +1608,100 @@ S M A L L
     font-size: 10vw;
     height: 18vw;
     margin: 3vw 0 0 0;
-    padding: 1vw;
+    padding: 2vw;
   }
 
   /*-------------*/
   .gr5 .col:nth-child(3) {
-    width: 20vw;
     display: none;
-  }
-  .gr5 .col:nth-child(3) img:first-of-type {
-    top: 13vw;
-    right: -12vw;
-    width: 30vw;
-  }
-  .gr5 .col .footer {
-    height: 15vw;
   }
 
   /***************/
 
   .gr6 {
-    margin: 0 0 0 0;
+    margin: 14vw 0 0 0;
   }
   .gr6 .bg-img {
     width: 100%;
+    height: 180vw;
+    object-fit: cover;
     padding: 1%;
   }
   .gr6 .fg-row {
+    flex-flow: column nowrap;
+    align-items: center;
     top: 0;
     left: 0;
   }
   .gr6 .col {
-    width: 50%;
-    padding: 5% 0 0 5%;
+    width: 90%;
+    padding: 2vw;
   }
 
+  .gr6 .logo {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 12vw;
+  }
   .gr6 .logo img {
-    width: 5vw;
-    margin: 0.2vw 2vw;
+    width: 7vw;
+    /* margin: 2vw; */
+    padding: 4vw;
   }
   .gr6 .logo p,
   .gr6 .logo h1,
   .gr6 .logo strong {
-    font-size: 3vw;
+    font-size: 6vw;
   }
 
   .gr6 p:first-of-type {
-    width: 90%;
-    font-size: 1.5vw;
+    /* width: 90%; */
+    font-size: 6vw;
+    margin: 0;
+    padding: 0%;
   }
 
   /* copyrignt*/
   .gr6 p:nth-of-type(2) {
-    bottom: -10vw;
-    font-size: 1.9vw;
+    bottom: -74vw;
+    font-size: 5vw;
   }
 
   .gr6 .address {
-    top: 50%;
+    top: 110%;
   }
   .gr6 .address img {
-    width: 2vw;
+    width: 8vw;
     margin: 0.2vw 2vw;
   }
   .gr6 .address p {
-    font-size: 1.5vw;
+    font-size: 6vw;
   }
 
   .gr6 .email {
-    top: 80%;
+    top: 130%;
   }
   .gr6 .email img {
-    width: 2vw;
+    width: 8vw;
     margin: 0.2vw 2vw;
   }
   .gr6 .email p {
-    font-size: 1.5vw;
+    font-size: 6vw;
   }
 
   .gr6 .msg {
-    bottom: -12vw;
-    right: 5vw;
+    bottom: -60vw;
+    right: 16vw;
   }
   .gr6 .msg div {
-    border-radius: 1vw;
-    width: 2vw;
-    height: 2vw;
-    margin: 1vw;
+    border-radius: 5vw;
+    width: 10vw;
+    height: 10vw;
+    margin: 4vw;
   }
   .gr6 .msg img {
-    top: 0.2vw;
-    left: 0.2vw;
-    width: 1.6vw;
+    top: 1vw;
+    left: 1vw;
+    width: 8vw;
   }
 }
