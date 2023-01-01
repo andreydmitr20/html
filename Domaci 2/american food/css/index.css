@@ -533,7 +533,7 @@
 }
 
 /**********
-
+S M A L L
 **********/
 @media only screen and (min-width: 0px) and (max-width: 599px) {
   .res.s {
@@ -941,7 +941,7 @@
 }
 
 /**********
-
+M I D D L E
 **********/
 @media only screen and (min-width: 600px) and (max-width: 1279px) {
   .res.m {
@@ -1315,7 +1315,7 @@
   }
 }
 /**********
-
+B I G
 **********/
 @media only screen and (min-width: 1280px) {
   .res.l {
