@@ -1,29 +1,49 @@
+// menu for small screens
 var menu_shown = false
+function menuClick (job) {
+  const menu_sel = '.g1 .menu ul'
 
-function click_menu (init) {
-  if (init === true) {
-    document
-      .querySelector('.g1 .menu img')
-      .addEventListener('click', click_menu)
-    console.log('set onclick')
-  } else {
-    let ul = document.querySelector('.g1 .menu ul')
-
+  function menuHide () {
     if (menu_shown) {
+      let ul = document.querySelector(menu_sel)
       ul.style.display = 'none'
       menu_shown = false
-    } else {
-      ul.style.display = 'block'
-      menu_shown = true
     }
-    console.log('onclick')
   }
-}
 
-// init
-window.onload = function () {
-  let init = true
-  console.log('init..')
-  click_menu(init)
-  console.log('end of init')
+  function menuShow () {
+    ul = document.querySelector(menu_sel)
+    ul.style.display = 'block'
+    menu_shown = true
+  }
+
+  function menuRestore () {
+    if (window.innerWidth >= 600) {
+      menu_shown = false
+      ul = document.querySelector(menu_sel)
+      ul.style.display = null
+    }
+  }
+
+  console.log('menuClick.' + job)
+  switch (job) {
+    case 'init':
+      document
+        .querySelector('.g1 .menu img')
+        .addEventListener('click', menuClick)
+      window.addEventListener('resize', menuRestore)
+      break
+    case 'hide':
+      menuHide()
+      break
+    case 'show':
+      menuShow()
+    default:
+      if (menu_shown) {
+        menuHide()
+      } else {
+        menuShow()
+      }
+      break
+  }
 }

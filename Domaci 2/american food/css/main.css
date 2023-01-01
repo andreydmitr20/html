@@ -91,12 +91,15 @@ A N I M A T I O N
 
 /**********/
 @keyframes anim_color {
-  0%,
-  100% {
-    background-color: var(--bg-gr1-color);
+  0% {
+    background-color: var(--bg-g2-color);
+    opacity: 0.5;
+    /* background-color: var(--bg-g1-color); */
   }
-  50% {
-    background-color: var(--bg-gr2-color);
+  100% {
+    background-color: var(--bg-g1-color);
+    opacity: 1;
+    /* background-color: var(--bg-g2-color); */
   }
 }
 
