@@ -83,7 +83,7 @@
   flex-flow: row nowrap;
   justify-content: flex-end;
   align-items: center;
-  z-index: 13;
+  z-index: 4;
 }
 
 .g1 .delivery img {

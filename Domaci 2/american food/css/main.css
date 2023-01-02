@@ -28,6 +28,10 @@
   --media-m: 961px;
   --media-s: 320px;
   */
+
+  --img-rotate: 4deg;
+  --img-l-rotate: -4deg;
+  --shadow-light-color: rgba(200, 200, 200, 255);
 }
 
 * {
