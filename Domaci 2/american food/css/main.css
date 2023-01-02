@@ -41,10 +41,8 @@ body {
 
 /* responsive debug */
 .res {
-  display: block;
   display: none;
-  /* border: var(--debug-border); */
-
+  /* display: none !important; */
   z-index: 20;
   position: sticky;
   top: 0;
