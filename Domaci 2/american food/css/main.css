@@ -95,11 +95,15 @@ A N I M A T I O N
 @keyframes anim_color {
   0% {
     background-color: var(--bg-g2-color);
+    border-radius: 1rem;
+    /* padding: 0.4rem; */
     opacity: 0.5;
     /* background-color: var(--bg-g1-color); */
   }
   100% {
     background-color: var(--bg-g1-color);
+    border-radius: 1rem;
+    /* padding: 0.4rem; */
     opacity: 1;
     /* background-color: var(--bg-g2-color); */
   }

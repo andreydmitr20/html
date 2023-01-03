@@ -45,14 +45,15 @@
   color: var(--fg-main-color);
   font-family: var(--font-sans-serif);
   font-weight: bold;
+  filter: drop-shadow(0vw 0vw 0.4vw var(--bg-g1-color));
 }
 .g1 ul a:hover,
 .g1 ul a:focus {
   cursor: pointer;
-  animation: 0.3s ease-in-out anim_color 1;
+  animation: 0.3s ease-in-out anim_color 1 forwards;
 }
 .g1 ul a:active {
-  animation: 0.1s ease-in anim_press 1;
+  animation: 0.1s ease-in anim_press 1 forwards;
 }
 
 .g1 .logo {
