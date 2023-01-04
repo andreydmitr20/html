@@ -108,7 +108,6 @@
 
 body {
   background-color: var(--bg-g1-color);
-  overflow: hidden;
 }
 .grid-cont {
   display: flex;
@@ -118,7 +117,7 @@ body {
 .frame {
   flex: auto;
 
-  /* overflow: visible; */
+  overflow: auto;
   /* height: auto; */
   padding: 0;
   margin: 0;
