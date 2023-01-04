@@ -109,6 +109,15 @@ A N I M A T I O N
     /* background-color: var(--bg-g2-color); */
   }
 }
+@keyframes anim_logo {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(5%) scaleY(0.7);
+  }
+}
 
 /************/
 @keyframes anim_press {
@@ -118,4 +127,119 @@ A N I M A T I O N
   to {
     transform: scale(100%);
   }
+}
+
+/*******/
+.g1 {
+  display: flex;
+  flex-flow: row wrap;
+
+  row-gap: 0;
+  column-gap: 0;
+  background-color: var(--bg-g1-color);
+}
+.g1 .top_block {
+  flex: auto;
+
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 0;
+  column-gap: 0;
+}
+/* menu common*/
+.g1 .menu {
+  flex: auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  /* justify-content: initial;
+  position: initial; */
+}
+
+.g1 .menu ul {
+  flex: auto;
+  list-style-type: none;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.g1 .menu ul a {
+  flex: auto;
+
+  text-decoration: none;
+
+  color: var(--fg-main-color);
+  font-family: var(--font-sans-serif);
+  font-weight: bold;
+  filter: drop-shadow(0vw 0vw 0.4vw var(--bg-g1-color));
+}
+.g1 ul a:hover,
+.g1 ul a:focus {
+  cursor: pointer;
+  animation: 0.3s ease-in-out anim_color 1 forwards;
+}
+.g1 ul a:active {
+  animation: 0.1s ease-in anim_press 1 forwards;
+}
+
+.g1 .logo {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  z-index: 13;
+}
+
+.g1 .logo p,
+.g1 .logo h1,
+.g1 .logo strong {
+  flex: auto;
+  color: var(--fg-logo-color);
+  font-family: var(--font-sans-serif);
+  font-weight: bold;
+}
+
+.g1 .delivery {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 4;
+}
+
+.g1 .delivery img {
+  flex: auto;
+  filter: var(--svg-black-to-white);
+}
+
+.g1 .delivery p,
+.g1 .delivery strong {
+  color: var(--fg-main-color);
+  font-family: var(--font-sans-serif);
+  font-weight: bold;
+}
+
+.g1 .tel {
+  text-decoration: none;
+  color: var(--fg-main-color);
+}
+
+.g1 .tel:hover {
+  cursor: pointer;
+}
+
+.g1 .logo img {
+  flex: auto;
+
+  filter: var(--logo-svg-to-fg-logo-color);
+  animation-name: anim_logo;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
 }
