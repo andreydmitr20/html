@@ -149,6 +149,7 @@ S M A L L
   .g1 .menu ul {
     background-color: var(--bg-g1-color);
     filter: drop-shadow(2vw 2vw 0.8vw var(--bg-g2-color));
+    width: 60vw;
 
     display: none;
     position: absolute;
