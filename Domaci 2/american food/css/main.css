@@ -5,6 +5,7 @@
 
   --fg-main-color: rgba(73, 26, 2, 255);
   --fg-logo-color: rgba(66, 32, 11, 255);
+  --fg-logo-color-opacity: rgba(66, 32, 11, 0.5);
 
   --font-sans-serif: Saira Condensed, sans-serif;
   --font-serif: Alfa Slab One, serif;
