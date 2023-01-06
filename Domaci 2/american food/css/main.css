@@ -44,33 +44,9 @@ body {
   padding: 0 0 0 0;
 }
 
-/* responsive debug */
-.res {
-  display: none;
-  /* display: none !important; */
-  z-index: 20;
-  position: sticky;
-  top: 0;
-  width: 10px;
-  height: 10px;
-}
-.res.s {
-  background-color: red;
-  /* left: 30; */
-}
-.res.m {
-  background-color: green;
-  /* left: 20; */
-}
-.res.l {
-  background-color: blue;
-  /* left: 10; */
-}
 /**********
 
-
 A N I M A T I O N
-
 
 */
 @keyframes anim_tilting {
@@ -182,7 +158,7 @@ A N I M A T I O N
 .g1 ul a:hover,
 .g1 ul a:focus {
   cursor: pointer;
-  animation: 0.3s ease-in-out anim_color 1 forwards;
+  animation: 1s ease-in-out anim_color 1 forwards;
 }
 .g1 ul a:active {
   animation: 0.1s ease-in anim_press 1 forwards;
@@ -241,5 +217,5 @@ A N I M A T I O N
   filter: var(--logo-svg-to-fg-logo-color);
   animation-name: anim_logo;
   animation-iteration-count: infinite;
-  animation-duration: 2s;
+  animation-duration: 1s;
 }

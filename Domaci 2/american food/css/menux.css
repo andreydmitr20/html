@@ -51,11 +51,7 @@
 S M A L L
 **********/
 @media only screen and (min-width: 0px) and (max-width: 599px) {
-  .res.s {
-    display: block;
-  }
-
-  .grid-cont {
+   .grid-cont {
     grid-template-columns: 1fr;
   }
   .item a {
@@ -92,10 +88,7 @@ S M A L L
 M I D D L E
 **********/
 @media only screen and (min-width: 600px) and (max-width: 1279px) {
-  .res.m {
-    display: block;
-  }
-
+ 
   /******/
   .grid-cont {
     grid-template-columns: 1fr 1fr 1fr;
@@ -132,10 +125,7 @@ M I D D L E
 L A R G E
 **********/
 @media only screen and (min-width: 1280px) {
-  .res.l {
-    display: block;
-  }
-
+ 
   /******/
   .grid-cont {
     grid-template-columns: 1fr 1fr 1fr 1fr;

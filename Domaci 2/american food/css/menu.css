@@ -70,10 +70,6 @@ h1 {
 S M A L L
 **********/
 @media only screen and (min-width: 0px) and (max-width: 599px) {
-  .res.s {
-    display: block;
-  }
-
   .g1 {
     flex-flow: row wrap;
     /* margin: 0 0 0 0; */
@@ -168,10 +164,6 @@ S M A L L
 M I D D L E
 **********/
 @media only screen and (min-width: 600px) and (max-width: 1279px) {
-  .res.m {
-    display: block;
-  }
-
   /* menu medium */
   .g1 .menu img {
     display: none;
@@ -246,9 +238,6 @@ M I D D L E
 L A R G E
 **********/
 @media only screen and (min-width: 1280px) {
-  .res.l {
-    display: block;
-  }
   body {
     display: flex;
     flex-flow: column;
