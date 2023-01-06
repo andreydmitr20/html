@@ -19,7 +19,7 @@ const najmanjiIndeks = (niz, vrijednost) => {
   let index = 0
   for (let val of niz.sort((a, b) => a - b)) {
     // console.log(`${vrijednost} ${val}`)
-    if (vrijednost < parseFloat(val)) return index
+    if (vrijednost < val) return index
     index++
   }
 
