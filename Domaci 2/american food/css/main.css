@@ -1,7 +1,7 @@
 /* border: var(--debug-border); */
 :root {
   --debug-border: 2px solid red;
-  /* --debug-border: none; */
+  --debug-border: none;
 
   --fg-main-color: rgba(73, 26, 2, 255);
   --fg-logo-color: rgba(66, 32, 11, 255);
@@ -25,10 +25,6 @@
     hue-rotate(315deg) brightness(103%) contrast(102%);
   --logo-svg-to-fg-logo-color: invert(12%) sepia(66%) saturate(1139%)
     hue-rotate(352deg) brightness(89%) contrast(94%);
-  /* does not work in @media
-  --media-m: 961px;
-  --media-s: 320px;
-  */
 
   --img-rotate: 4deg;
   --img-l-rotate: -4deg;
