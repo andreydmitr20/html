@@ -108,7 +108,7 @@ const razbijaNiz = (niz, sub_len) => {
 })
 
 console.log(
-  '4. Napisati program koji za n elemenata niza (brojevi od 1 do n) generiše parove \
+  '\n\n 4. Napisati program koji za n elemenata niza (brojevi od 1 do n) generiše parove \
 tako da se niti jedan od elemenata koji je već u paru ne ponovi više ni u \
 jednom paru. Npr. (1,4), (2,3), (5,8) su ok, ali (1,6) nije jer je 1 već u paru sa \
 4, (2,5) takođe nije jer je 2 u paru sa 3, a 5 u paru sa 8. \
@@ -153,7 +153,7 @@ const randomPairs = niz => {
 })
 
 console.log(
-  '5. Napisati funkciju koja provjerava da li se string (prvi argument funkcije) \
+  '\n\n 5. Napisati funkciju koja provjerava da li se string (prvi argument funkcije) \
 završava sa target stringom (drugi argument funkcije)'
 )
 
@@ -178,4 +178,26 @@ const isStringEndedWith = (end_str, inp_str) => {
   console.log(
     ` isStringEndedWith: ${sp(isStringEndedWith(obj.end_str, obj.inp_str))}`
   )
+})
+
+console.log(
+  '\n\n 6. Napisati funkciju koja skraćuje string (prvi argument) do unijete dužine (drugi \
+    argument). Na kraj stringa dodati ...'
+)
+
+const dottedStr = (inp_str, str_len) => {
+  let n = inp_str.length
+  if (str_len > n) return inp_str + '.'.repeat(str_len - n)
+  return inp_str.substr(0, str_len) + '.'.repeat(n - str_len)
+}
+
+;[
+  { inp_str: 'test string', n: 0 },
+  { inp_str: 'test string', n: 4 },
+  { inp_str: 'test string', n: 8 },
+  { inp_str: 'test string', n: 13 }
+].forEach(obj => {
+  console.log(`\n string: ${sp(obj.inp_str)}`)
+  console.log(` cut length: ${sp(obj.n)}`)
+  console.log(` truncStr: ${sp(dottedStr(obj.inp_str, obj.n))}`)
 })
