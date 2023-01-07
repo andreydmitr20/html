@@ -201,3 +201,58 @@ const dottedStr = (inp_str, str_len) => {
   console.log(` cut length: ${sp(obj.n)}`)
   console.log(` truncStr: ${sp(dottedStr(obj.inp_str, obj.n))}`)
 })
+
+console.log(
+  '\n\n 7. Narcissistic Number je broj čija suma cifara (tog broja) stepenova sa njegovim \
+brojem cifara daje isti taj broj. \
+Primjer 1​: 153 (3 cifre) \
+1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153 \
+Primjer 2​: 1634 (4 cifre): \
+1^4 + 6^4 + 3^4 + 4^4 = 1 + 1296 + 81 + 256 = 1634 \
+Vaš program treba da vrati ​true ​ili ​false ​u zavisnosti od toga da li je broj \
+Narcissitic ili nije. Input je uvijek validan broj.'
+)
+
+const isNarcissitic = broj => {
+  let str_broj = broj.toString()
+  let str_broj_len = str_broj.length
+
+  let sum = 0
+  let i = 0
+  //   while (i < str_broj_len) sum += str_broj[i++].charCodeAt() ** str_broj_len
+  while (i < str_broj_len) {
+    sum += (str_broj[i++].charCodeAt() - 48) ** str_broj_len
+  }
+  return sum === broj
+}
+
+;[0, 12, 153, 122, 371, 1634].forEach(broj => {
+  console.log(`\n broj: ${sp(broj)}`)
+  console.log(` isNarcissitic: ${sp(isNarcissitic(broj))}`)
+})
+
+console.log(
+  '\n\n 8. Napisati program koji provjerava da li se zadati broj nalazi u zadatom \
+segmentu. Primjer: ​ran_inclusive( ​ 3, 10, 5) vraća ​true ​jer je 3 <= 5 <= 10, \
+ran_inclusive (- ​ 10, 13, -25) vraća ​false ​jer je -25 manji od -10, a samim tim i \
+od 13, pa nije iz zadatog segmenta'
+)
+
+const ran_inclusive = (first, last, num) => {
+  if (first > last) {
+    let i = last
+    last = first
+    first = i
+  }
+
+  return first <= num && num <= last
+}
+
+;[
+  { f: 3, l: 10, n: 5 },
+  { f: -10, l: 13, n: -25 },
+  { f: -10, l: -25, n: -11 }
+].forEach(obj => {
+  console.log(`\n ran_inclusive(${sp(obj.f)},${sp(obj.l)},${sp(obj.n)}):`)
+  console.log(`${ran_inclusive(obj.f, obj.l, obj.n)}`)
+})
