@@ -106,3 +106,76 @@ const razbijaNiz = (niz, sub_len) => {
   console.log(` Len: ${obj.len}`)
   console.log(` Result: ${sp(razbijaNiz(obj.niz, obj.len))}`)
 })
+
+console.log(
+  '4. Napisati program koji za n elemenata niza (brojevi od 1 do n) generiše parove \
+tako da se niti jedan od elemenata koji je već u paru ne ponovi više ni u \
+jednom paru. Npr. (1,4), (2,3), (5,8) su ok, ali (1,6) nije jer je 1 već u paru sa \
+4, (2,5) takođe nije jer je 2 u paru sa 3, a 5 u paru sa 8. \
+a. Koristiti Math.floor() - zaokružuje na donje cijelo i Math.random() - \
+vraca decimilan broj između 0 i 1 (uključujući 0, ne uključujući 1) i. \
+ Math.random() * 10 - vraća brojeve od 0 do 9,99999.... \
+b. Može vam pomoći i array.splice(element_index, 1) u kombinaciji sa \
+arr.indexOf(item) [ako ne nađe item u arr vrati -1] i. \
+ [“a”,”b”,”c”].splice(2, 1) => [“a”, “b”]'
+)
+
+const randomNiz = n => {
+  let res_niz = []
+  while (res_niz.length !== n) {
+    let rand = Math.floor(Math.random() * (n + 1))
+    if (rand !== 0 && res_niz.indexOf(rand) === -1)
+      res_niz = res_niz.concat(rand)
+  }
+  return res_niz
+}
+
+const randomPairs = niz => {
+  let res_niz = []
+  let n = niz.length
+
+  while (n > 0) {
+    if (n == 1) {
+      res_niz = res_niz.concat([niz])
+      break
+    }
+    res_niz = res_niz.concat([niz.splice(0, 2)])
+    n -= 2
+  }
+  return res_niz
+}
+
+;[0, 1, 4, 9].forEach(n => {
+  let niz = randomNiz(n)
+  console.log(`\n N: ${sp(n)}`)
+  console.log(` Niz: ${sp(niz)}`)
+  console.log(` Result: ${sp(randomPairs(niz))}`)
+})
+
+console.log(
+  '5. Napisati funkciju koja provjerava da li se string (prvi argument funkcije) \
+završava sa target stringom (drugi argument funkcije)'
+)
+
+const isStringEndedWith = (end_str, inp_str) => {
+  inp_str = inp_str.trim()
+  let i = inp_str.indexOf(end_str, 0)
+  let j = -1
+  while (i !== -1) {
+    j = i
+    i = inp_str.indexOf(end_str, j + 1)
+  }
+  return j !== -1 && j + end_str.length === inp_str.length
+}
+
+;[
+  { end_str: 'end', inp_str: 'end the endend ' },
+  { end_str: 'enk', inp_str: ' end endthe end enk ' },
+  { end_str: 'end', inp_str: 'endendthe end1' }
+].forEach(obj => {
+  console.log(`\n ending substring: ${sp(obj.end_str)}`)
+  console.log(` string: ${sp(obj.inp_str)}`)
+  console.log(
+    ` isStringEndedWith: ${sp(isStringEndedWith(obj.end_str, obj.inp_str))}`
+  )
+})
