@@ -263,7 +263,7 @@ const ran_inclusive = (first, last, num) => {
 })
 
 console.log(
-  '9. Napisati program koji za unijeti URL (string), izvlači (parsira) samo domain \
+  '\n\n 9. Napisati program koji za unijeti URL (string), izvlači (parsira) samo domain \
 name i vraća ga kao string. Pretpostaviti da korisnik unosi ispravan URL. \
 Primjeri​: \
 get_domain​("http://github.com/carbonfive/raygun"), izlaz "github.com" \
@@ -332,4 +332,122 @@ const get_domain = url => {
   'zombie-bites.com'
 ].forEach(url => {
   console.log(`\n get_domain(${sp(url)}): ${sp(get_domain(url))}`)
+})
+
+console.log(
+  '\n\n 10. Dječakov put od škole do kuće je dug. \
+Da bi mu bilo interesantnije, odlučio je \
+da sabira sve brojeve kuća (na svakoj kući piše adresa, tj. broj) pored kojih \
+prođe dok ide do kuće. Nažalost, nemaju sve kuće brojeve na njima, a osim \
+toga dječak redovno mijenja ulice, tako da se brojevi ne pojavljuju u nekom \
+definisanom redosledu. U jednom momentu tokom šetnje, dječak naiđe na \
+kuću na kojoj piše 0, što ga je iznenadilo toliko da je zaboravio (prestao) da \
+sabira brojeve nakon što je naišao na ovu kuću. Za zadati niz kuća (svaka \
+identifikovana sa brojem) odrediti zbir koji je dječak dobio.  \
+Primjer​:\
+Za ​input ​= [5, 1, 2, 3, 0, 1, 5, 0, 2], ​output ​treba da bude 11 (5 + 1 + 2 + 3 =\
+11)'
+)
+
+const sumToZero = niz => {
+  let sum = 0
+  for (let broj of niz) {
+    if (broj == 0) break
+    sum += broj
+  }
+  return sum
+}
+
+;[[5, 1, 2, 3, 0, 1, 5, 0, 2], [3, 0, 1, 5, 0, 2], []].forEach(niz => {
+  console.log(`\n sumToZero(${sp(niz)}): ${sp(sumToZero(niz))}`)
+})
+
+console.log(
+  '\n\n 11. Klijenti postavljaju zahtjeve brokeru za kupovinu/prodaju akcija.\
+ Zahtjevi mogu da budu jednostavni ili višestruki (više jednostavnih). \
+ Zahtjev ima sledeći format:Quote /space/ Quantity /space/ Price /space/ Status \
+gdje ​Quote ​predstavlja naziv akcije, sadrži non-whitespace karaktere, \
+Quantity ​je prirodan broj koji predstavlja broj akcija koje se prodaju/kupuju,\
+Price ​je float koji predstavlja cijenu pojedine akcije (sa decimalnom tačkom \
+"." ), ​Status ​je B (buy) ili S (sell) koji predstavlja da li se akcije prodaju ili kupuju.\
+Primjer 1 (simple): "GOOG 300 542.0 B" \
+Višestruki zahtjevi se sastoje od više simple zahtjeva koji su spojeni zarezom \
+Primjer 2 (multiple-višestruki): \
+"ZNG 1300 2.66 B,NY 50 56.32 B,OWW 1000 11.623 B,OGG 20 580.1 B" \
+Da olakšate brokeru posao vaš zadatak je da mu vratite string "Buy: b Sell: s" \
+gdje su b i s formata double zaokruženog na 2 decimalse, b predstavlja \
+ukupnu cijenu kupljenih akcija, a s ukupnu cijenu prodatih akcija.\
+Output za primjer 2: "Buy: 29499.00 Sell: 0"'
+)
+
+const prepBrokerData = stringData => {
+  let parsedData = []
+
+  const err = () => {
+    return 'ERROR'
+  }
+
+  const parseData = data => {
+    if (data.length === 0) return err()
+    let start_i
+    let next_i = -1
+    do {
+      const singeData = new Object()
+
+      // quote
+      start_i = next_i + 1
+      next_i = data.indexOf(' ', start_i)
+      if (next_i === -1) return err()
+      singeData.quote = data.substr(start_i, next_i - start_i)
+
+      // quantity
+      start_i = next_i + 1
+      next_i = data.indexOf(' ', start_i)
+      if (next_i === -1) return err()
+      singeData.quantity = data.substr(start_i, next_i - start_i)
+
+      // price
+      start_i = next_i + 1
+      next_i = data.indexOf(' ', start_i)
+      if (next_i === -1) return err()
+      singeData.price = data.substr(start_i, next_i - start_i)
+
+      // status
+      start_i = next_i + 1
+      next_i = data.indexOf(',', start_i)
+      if (next_i === -1) {
+        singeData.status = data.substr(start_i, data.length - start_i)
+      } else {
+        singeData.status = data.substr(start_i, next_i - start_i)
+      }
+      parsedData.push(singeData)
+    } while (next_i !== -1)
+    return
+  }
+
+  let error = parseData(stringData)
+  if (error !== undefined) return error
+  //   console.log(sp(parsedData))
+
+  let buy = 0
+  let sell = 0
+  parsedData.forEach(line => {
+    let total = parseFloat(line.quantity) * parseFloat(line.price)
+    if (line.status === 'B') {
+      buy += total
+    } else if (line.status === 'S') {
+      sell += total
+    } else return err()
+  })
+
+  return `Buy: ${buy.toFixed(2)} Sell: ${sell.toFixed(2)}`
+}
+
+;[
+  // [{ quote: 3, quantity: 10, price: 5, status:1 }],
+  'GOOG 300 542.0 B',
+  'ZNG 1300 2.66 B,NY 50 56.32 B,OWW 1000 11.623 B,OGG 20 580.1 B'
+].forEach(val => {
+  console.log(`\n input: ${sp(val)}`)
+  console.log(` prepBrokerData: ${prepBrokerData(val)}`)
 })
