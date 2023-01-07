@@ -253,6 +253,83 @@ const ran_inclusive = (first, last, num) => {
   { f: -10, l: 13, n: -25 },
   { f: -10, l: -25, n: -11 }
 ].forEach(obj => {
-  console.log(`\n ran_inclusive(${sp(obj.f)},${sp(obj.l)},${sp(obj.n)}):`)
-  console.log(`${ran_inclusive(obj.f, obj.l, obj.n)}`)
+  console.log(
+    `\n ran_inclusive(${sp(obj.f)},${sp(obj.l)},${sp(obj.n)}): ${ran_inclusive(
+      obj.f,
+      obj.l,
+      obj.n
+    )}`
+  )
+})
+
+console.log(
+  '9. Napisati program koji za unijeti URL (string), izvlači (parsira) samo domain \
+name i vraća ga kao string. Pretpostaviti da korisnik unosi ispravan URL. \
+Primjeri​: \
+get_domain​("http://github.com/carbonfive/raygun"), izlaz "github.com" \
+get_domain(​"https://google.com"), izlaz "google.com" \
+get_domain(​"http://github.com/carbonfive/raygun"), izlaz "github.com" \
+get_domain(​"http://www.zombie-bites.com"), izlaz "zombie-bites.com"'
+)
+
+const get_domain = url => {
+  const err = () => {
+    return ''
+  }
+
+  url = url.trim()
+  if (url === '') return err()
+
+  url = url.toLowerCase()
+
+  // http
+  let i = url.indexOf('http')
+  if (i === -1) {
+    i = 0
+  } else {
+    i += 4
+    if (url[i] === 's') i++
+    if (url[i] !== ':') return err()
+    i++
+    if (url.substr(i, 2) !== '//') return err()
+    i += 2
+  }
+
+  // find first '/'
+  let end_i = url.indexOf('/', i)
+  if (end_i === -1) end_i = url.length
+
+  // find first '.'
+  let first_dot_i = url.indexOf('.')
+  if (first_dot_i === -1) return err()
+  first_dot_i++
+
+  while (true) {
+    // test length between domain start and '.'
+    if (i === first_dot_i - 1) return err()
+
+    let next_dot_i = url.indexOf('.', first_dot_i)
+    if (next_dot_i === -1 || next_dot_i >= end_i) break
+    //
+    i = first_dot_i
+    first_dot_i = next_dot_i + 1
+  }
+
+  // test length between '.' and domain end
+  if (first_dot_i === end_i) return err()
+
+  return url.substr(i, end_i - i)
+}
+
+;[
+  'https://github./carbonfive/raygun',
+  'test',
+  '.com',
+  'redbull.common.org',
+  'http://github.com/carbonfive/raygun',
+  'https://google.com',
+  'http://www.zombie-bites.com',
+  'zombie-bites.com'
+].forEach(url => {
+  console.log(`\n get_domain(${sp(url)}): ${sp(get_domain(url))}`)
 })
