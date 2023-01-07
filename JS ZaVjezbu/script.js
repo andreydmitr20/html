@@ -1,6 +1,6 @@
 'use strict'
 
-// func to right show obj and array
+// convert obj and array to str
 function sp (part) {
   function sp_array (part) {
     let s = '['
@@ -12,13 +12,28 @@ function sp (part) {
     }
     return s + ']'
   }
+
+  function sp_obj (part) {
+    let s = '{'
+    let n = Object.keys(part).length
+    if (n > 0) {
+      s += sp(Object.keys(part)[0]) + ':' + sp(Object.values(part)[0])
+      let i = 1
+      while (i < n) {
+        s += ',' + sp(Object.keys(part)[i]) + ':' + sp(Object.values(part)[i])
+        i++
+      }
+    }
+    return s + '}'
+  }
+
   switch (typeof part) {
     case 'string':
       return '"' + part + '"'
     case 'object':
       if (Array.isArray(part)) return sp_array(part)
       if (part === null) return 'null'
-      return part.toString()
+      return sp_obj(part)
     case 'number':
       return part.toString()
     case 'undefined':
