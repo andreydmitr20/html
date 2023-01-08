@@ -383,9 +383,7 @@ Output za primjer 2: "Buy: 29499.00 Sell: 0"'
 const prepBrokerData = stringData => {
   let parsedData = []
 
-  const err = () => {
-    return 'ERROR'
-  }
+  const err = () => 'ERROR'
 
   const parseData = data => {
     if (data.length === 0) return err()
@@ -420,6 +418,7 @@ const prepBrokerData = stringData => {
       } else {
         singeData.status = data.substr(start_i, next_i - start_i)
       }
+
       parsedData.push(singeData)
     } while (next_i !== -1)
     return
@@ -444,10 +443,163 @@ const prepBrokerData = stringData => {
 }
 
 ;[
-  // [{ quote: 3, quantity: 10, price: 5, status:1 }],
   'GOOG 300 542.0 B',
   'ZNG 1300 2.66 B,NY 50 56.32 B,OWW 1000 11.623 B,OGG 20 580.1 B'
 ].forEach(val => {
   console.log(`\n input: ${sp(val)}`)
   console.log(` prepBrokerData: ${prepBrokerData(val)}`)
+})
+
+console.log(
+  '\n\n 12. Vaš program treba da nađe najdužu sekvencu izastopnih \
+nula za unijetu listu.\
+Takodje, treba da vrati pocetnu i krajnju poziciju te podliste u listi \
+Primjer​:\
+Niz [1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0] ima tri sekvence uzastopnih nula sa \
+dužinama 3, 1 i 4. \
+Vraća niz ​[4, 7, 10] gdje je 4 duzina podniza, 7 startna pozicija (uključujući),\
+10 krajnja pozicija (ukljucujući)'
+)
+
+const findMaxZeroSubArray = niz => {
+  let max_count = 0
+  let max_start_i = 0
+  let max_end_i = 0
+
+  let cur_count = 0
+  let cur_start_i = 0
+
+  let isZero = false
+  let i
+
+  const saveIfMax = () => {
+    if (cur_count > max_count) {
+      max_count = cur_count
+      max_start_i = cur_start_i
+      max_end_i = i - 1
+    }
+  }
+  for (i = 0; i < niz.length; i++) {
+    let elem = niz[i]
+    if (elem === 0) {
+      if (isZero) {
+        // inside zero subarray
+        cur_count++
+      } else {
+        // first 0 in new subarray
+        isZero = true
+        cur_start_i = i
+        cur_count = 1
+      }
+    } else {
+      if (isZero) {
+        // first non-zero after zero array
+        isZero = false
+        saveIfMax()
+      } else {
+        // ordinary non-zero element
+      }
+    }
+  }
+
+  if (isZero) saveIfMax()
+
+  return [max_count, max_start_i, max_end_i]
+}
+
+;[
+  [1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0],
+  [288, 0, 0, 0, 0, 0, 7, 6, 0, 0, 0, 0, 7, 54, 0, 9, 0, 9, 0]
+].forEach(niz => {
+  console.log(`\n input: ${sp(niz)}`)
+  console.log(` findMaxZeroSubArray: ${findMaxZeroSubArray(niz)}`)
+})
+
+console.log(
+  '\n\n 13. Napisati funkciju koja za zadati string i slovo vraća sve riječi koje se \
+završavaju sa zadatim slovom, indekse zadatog slova, kao i broj riječi koje se \
+završavaju sa zadatim slovom u rečenici. \
+Primjer​: ​get_words_ends_with_letter ​(“Print only the words that end with the \
+chosen letter in those sentences. Example can contains one or more \
+sentences.”, “s”) vraća niz objekata sledećeg oblika:\
+[ { { word: “words”, position: 19 }, { word : “sentences”, position : 70 },\
+num_of_words: 2 }, { { word: “contains”, position: 92}, { word: “sentences”,\
+position: 114 }, num_of_words: 2} ]\
+Objašnjenje​: objekti unutar liste predstavljaju informacije o svakoj rečenici \
+pojedinačno. Objekti u rečenici opisuju: key ​word ​je riječ koja se završava sa \
+zadatim slovom (u primjeru je to slovo s), a key ​position ​predstavlja indeks \
+slova u unešenom stringu. Key ​num_of_words (​u obije rečenice je to 2​) \
+predstavlja broj riječi koje se u rečenici završavaju sa odabranim slovom.'
+)
+
+const get_words_ends_with_letter = (in_str, end_char) => {
+  let res = []
+
+  let i = 0
+  let word
+
+  let dot = false
+  let for_sentence = new Object()
+  for_sentence.num_of_words = 0
+  for_sentence.items = []
+
+  const testWord = (word, n) => {
+    if (word[n - 1] === end_char) {
+      let for_word = new Object()
+      for_word.word = word
+      for_word.position = i
+      for_sentence.items.push(for_word)
+      for_sentence.num_of_words++
+    }
+  }
+
+  for (word of in_str.split(' ')) {
+    let n = word.length
+    if (n === 0) {
+      // space
+      i++
+    } else {
+      if (word[n - 1] === '.') {
+        dot = true
+
+        if (n > 1) testWord(word.substr(0, n - 1), n - 1)
+      } else {
+        testWord(word, n)
+      }
+
+      i += n + 1
+
+      if (dot) {
+        dot = false
+
+        res.push(for_sentence)
+
+        for_sentence = new Object()
+        for_sentence.num_of_words = 0
+        for_sentence.items = []
+      }
+    }
+  }
+  return res
+}
+
+;[
+  {
+    in_str:
+      'Print only the words that end with the chosen letter in those sentences. Example can contains one or more sentences.',
+    end_char: 's'
+  },
+  {
+    in_str:
+      ' Print only  the words that end with the chosen letter in those sentences .  Example can contains one or more sentences.',
+    end_char: 's'
+  }
+].forEach(obj => {
+  console.log(`\n input string: ${sp(obj.in_str)}`)
+  console.log(` end char: ${sp(obj.end_char)}`)
+  console.log(
+    ` get_words_ends_with_letter:): ${sp(
+      get_words_ends_with_letter(obj.in_str, obj.end_char)
+    )}`
+  )
 })
