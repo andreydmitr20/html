@@ -447,7 +447,7 @@ const prepBrokerData = stringData => {
   'ZNG 1300 2.66 B,NY 50 56.32 B,OWW 1000 11.623 B,OGG 20 580.1 B'
 ].forEach(val => {
   console.log(`\n input: ${sp(val)}`)
-  console.log(` prepBrokerData: ${prepBrokerData(val)}`)
+  console.log(` prepBrokerData: ${sp(prepBrokerData(val))}`)
 })
 
 console.log(
@@ -512,7 +512,7 @@ const findMaxZeroSubArray = niz => {
   [288, 0, 0, 0, 0, 0, 7, 6, 0, 0, 0, 0, 7, 54, 0, 9, 0, 9, 0]
 ].forEach(niz => {
   console.log(`\n input: ${sp(niz)}`)
-  console.log(` findMaxZeroSubArray: ${findMaxZeroSubArray(niz)}`)
+  console.log(` findMaxZeroSubArray: ${sp(findMaxZeroSubArray(niz))}`)
 })
 
 console.log(
@@ -602,4 +602,102 @@ const get_words_ends_with_letter = (in_str, end_char) => {
       get_words_ends_with_letter(obj.in_str, obj.end_char)
     )}`
   )
+})
+
+console.log(
+  '\n\n 14. Napisati funkciju koja vraća broj cifara u stringu i kreira od njih integer.\
+  Primjer​: ​get_digits​(“Hi Mr. Rober53. How are you today? Today is \
+  08.10.2019”), vraća 5308102019 i to kao integer. ​Pomoć​: da provjerite da li je \
+  karakter slovo koristiti isalpha metod.'
+)
+
+// const get_digits = in_str => {
+//   return parseInt(in_str.match(/[0-9]/g).join(''))
+// }
+
+const get_digits = in_str => {
+  let s = ''
+  for (let ch of in_str) if (ch >= '0' && ch <= '9') s += ch
+  return parseInt(s)
+}
+
+;['Hi Mr. Rober53. How are you today? Today is 08.10.2019'].forEach(in_str => {
+  console.log(`\n string: ${sp(in_str)}`)
+  console.log(` get_digits: ${sp(get_digits(in_str))}`)
+})
+
+console.log(
+  '\n\n 15. Napisati funkciju koja vraća broj malih i broj velikih \
+slova za zadati string.\
+Primjer​: ​upper_lower ​(“Hi Mr. Rober. How are you today?”), vraća torku (19, \
+4), 19 - broj malih slova, 4 - broj velikih slova. Koristeći dobijeni torku \
+izračunati ukupan broj malih i velikih slova. ​Pomoć​: da provjerite da li je \
+karakter slovo koristiti isalpha metod.'
+)
+
+const lower_upper = in_str => {
+  let lo_cnt = 0
+  let hi_cnt = 0
+  for (let ch of in_str) {
+    let ch_down = ch.toLowerCase()
+    if (ch.toUpperCase() !== ch_down) {
+      if (ch == ch_down) lo_cnt++
+      else hi_cnt++
+    }
+  }
+  return [lo_cnt, hi_cnt]
+}
+
+;['Hi Mr. Rober. How are you today?'].forEach(in_str => {
+  console.log(`\n string: ${sp(in_str)}`)
+  console.log(` lower_upper: ${sp(lower_upper(in_str))}`)
+})
+
+console.log(
+  '\n\n 16. Svakog jutra sva vrata škole su zatvorena. \
+Škola je prilično velika, ima N \
+vrata. Učenici su počeli da dolaze. Teško je za povjerovati, ali svi oni žele da \
+uče. Škola ima N učenika, a oni dolaze jedno po jedno. Kada dijete prođe \
+kroz vrata, ono izmijeni status za vrata (Open-> Closed, Closed-> Opened).\
+Svaki učenik ima svoj broj, i svaki i-ti mijenja status i-tim vratima. ​Na primjer​: \
+kada prvi učenik dođe u školu, on mijenja status svim prvim vratima (otvara ih \
+sve). Drugi mijenja status za svaka druga vrata (druga, četvrta, šesta, itd.). \
+Treći mijenja status za svaka treća vrata (treća, šesta, itd.). Konačno, zadnji \
+učenik (n-ti), mijenja status za svaka n-ta vrata (samo su jedna takva, zadnja). \
+Vaš zadatak je da izračunate koliko vrata će ostati otvoreno nakon što dođu \
+svi učenici.\
+Primjer​:\
+Crveni kvadrati – zatvorena vrata, zeleni – otvorena vrata.\
+Input​: n – broj vrata i učenika, n ∈ N, n ∈ [1, 100000] \
+Output​: o – broj otvorenih vrata, o ∈ N \
+doors(5) treba da vrati 2'
+)
+
+const bruteForceDoor = n => {
+  let doors = []
+  let i
+  for (i = 1; i <= n; i++) {
+    doors.push(0)
+  }
+
+  for (i = 1; i <= n; i++) {
+    for (let j = i; j <= n; j += i) {
+      doors[j - 1] = 1 - doors[j - 1]
+    }
+  }
+  return doors.toString().match(/[1]/g).length
+}
+
+const doors = n => {
+  return Math.floor(Math.sqrt(n))
+}
+
+// for (let k = 1; k < 40; k++) {
+//   console.log(`${bruteForceDoor(k)} ${doors(k)}`)
+// }
+
+;[5, 24, 25].forEach(n => {
+  console.log(`\n broj vrata i učenika: ${sp(n)}`)
+  console.log(` broj otvorenih vrata (brute force) : ${sp(bruteForceDoor(n))}`)
+  console.log(` broj otvorenih vrata (doors): ${sp(doors(n))}`)
 })
