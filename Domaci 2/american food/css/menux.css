@@ -51,7 +51,7 @@
 S M A L L
 **********/
 @media only screen and (min-width: 0px) and (max-width: 599px) {
-   .grid-cont {
+  .grid-cont {
     grid-template-columns: 1fr;
   }
   .item a {
@@ -88,7 +88,6 @@ S M A L L
 M I D D L E
 **********/
 @media only screen and (min-width: 600px) and (max-width: 1279px) {
- 
   /******/
   .grid-cont {
     grid-template-columns: 1fr 1fr 1fr;
@@ -125,14 +124,13 @@ M I D D L E
 L A R G E
 **********/
 @media only screen and (min-width: 1280px) {
- 
   /******/
   .grid-cont {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   .item a {
     position: relative;
-    padding: :1rem;;
+    padding: 1rem;
   }
   .item a div {
     width: 100%;
@@ -156,6 +154,6 @@ L A R G E
   }
   .item p {
     font-size: 2rem;
-    padding:1rem;
+    padding: 1rem;
   }
 }
