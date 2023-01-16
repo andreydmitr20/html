@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .clock {
+            width: 31vw;
+            height: 31vw;
+            border-radius: 15.5vw;
+            border: 1vw solid aquamarine;
+            background-color: rgb(158, 158, 234);
+            position: relative;
+        }
+
+        .m-hand {
+            position: absolute;
+            top: 14.3vw;
+            left: 1vw;
+            height: 1vw;
+            width: 14vw;
+            transform-origin: 100%;
+            background-color: black;
+            /* transform: rotate(90deg); */
+            z-index: 2;
+        }
+
+        .h-hand {
+            position: absolute;
+            top: 14.1vw;
+            left: 3vw;
+            height: 1.4vw;
+            width: 12vw;
+            transform-origin: 100%;
+            background-color: blue;
+            /* transform: rotate(90deg); */
+            z-index: 3;
+        }
+
+        .s-hand {
+            position: absolute;
+            top: 14.5vw;
+            left: 0;
+            height: 0.5vw;
+            width: 15vw;
+            transform-origin: 100%;
+            background-color: red;
+            /* transform: rotate(90deg); */
+            z-index: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="h-hand"></div>
+        <div class="m-hand"></div>
+        <div class="s-hand"></div>
+    </div>
+
+    <script>
+        let h_hand = document.querySelector('.h-hand')
+        let m_hand = document.querySelector('.m-hand')
+        let s_hand = document.querySelector('.s-hand')
+
+        function calcDeg(cur, max) {
+            mult = 360 / max
+            angle = ((cur * mult) + 90).toFixed(2)
+            return angle
+        }
+
+        function showTime() {
+            let s = new Date().toLocaleTimeString();
+            let hi = s.indexOf(':')
+            let th = s.slice(0, hi)
+            let tm = s.slice(hi + 1, hi + 3)
+            let ts = s.slice(hi + 4, hi + 6)
+            s_hand.style.transform = `rotate(${calcDeg(ts, 60)}deg)`
+            m_hand.style.transform = `rotate(${calcDeg(tm, 60)}deg)`
+            h_hand.style.transform = `rotate(${calcDeg(th, 12)}deg)`
+        }
+        setInterval(showTime, 1000)
+    </script>
+</body>
+
+</html>
