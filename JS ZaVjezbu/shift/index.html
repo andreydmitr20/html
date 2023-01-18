@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: yellow;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .check-list {
+            flex: auto;
+
+            box-shadow: 1vw 1vw 1vw brown;
+            border-radius: 1vw;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        }
+
+        .check {
+            display: grid;
+            grid-template-columns: 1fr 6fr;
+            border-bottom: 0.1vw solid grey;
+            width: 100%;
+            background-color: white;
+        }
+
+        .check input {
+            margin: 2.2vw;
+        }
+
+        .check p {
+            padding: 2vw 2vw;
+            margin: 0;
+            font-size: 2vw;
+            border-left: 0.1vw solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="check-list">
+        <div class="check">
+            <input type="checkbox">
+            <p>This is an inbox layout</p>
+        </div>
+        <div class="check">
+            <input type="checkbox">
+            <p>Check one item</p>
+        </div>
+        <div class="check">
+            <input type="checkbox">
+            <p>Hold down your Shift key</p>
+        </div>
+        <div class="check">
+            <input type="checkbox">
+            <p>Check a lower item</p>
+        </div>
+        <div class="check">
+            <input type="checkbox">
+            <p>Everything inbetween should also be set to checked</p>
+        </div>
+        <div class="check">
+            <input type="checkbox">
+            <p>Try do it without any libraries</p>
+        </div>
+        <div class="check">
+            <input type="checkbox">
+            <p>Just regular JavaScript</p>
+        </div>
+        <div class="check">
+            <input type="checkbox" class="c1">
+            <p>Good luck</p>
+        </div>
+        <div class="check">
+            <input type="checkbox" class="c2">
+            <p>Do not forget</p>
+        </div>
+    </div>
+
+
+
+    <!--  -->
+    <script>
+        const checks = document.querySelectorAll(".check");
+
+        let inputFirst
+        let shift_key_pressed = false
+        let shift_list_in_proc = false
+
+        const makeTextDeleted = (pEl, deleted) => {
+            if (deleted) {
+                pEl.innerHTML = `<del>${pEl.innerHTML}</del>`
+            } else {
+                pEl.innerHTML = pEl.innerHTML.substr(5, pEl.innerHTML.length - 11)
+            }
+        }
+        const inputChanged = e => {
+            let inputCurrent = e.target
+            makeTextDeleted(inputCurrent.nextElementSibling,
+                inputCurrent.checked)
+
+            if (shift_list_in_proc) return;
+
+            if (inputCurrent.checked) {
+                if (inputFirst === undefined) {
+
+                    inputFirst = inputCurrent
+                } else {
+                    if (shift_key_pressed) {
+
+                        // 
+                        if (inputFirst.offsetTop > inputCurrent.offsetTop) {
+                            let el = inputFirst;
+                            inputFirst = inputCurrent
+                            inputCurrent = el
+                        }
+
+                        let parentEl = inputFirst.parentElement
+                        shift_list_in_proc = true
+                        while (true) {
+                            parentEl = parentEl.nextElementSibling
+                            if (parentEl === null) break
+                            let inputNext = parentEl.firstElementChild
+                            if (inputNext === inputCurrent) break
+                            if (!inputNext.checked) {
+                                inputNext.checked = true
+                                makeTextDeleted(inputNext.nextElementSibling, true)
+                            }
+                        }
+                        shift_list_in_proc = false
+                        inputFirst = inputCurrent
+                    } else {
+                        inputFirst = undefined
+                    }
+                }
+                // }
+
+            }
+        }
+
+        checks.forEach(check => {
+            // console.log(check.firstElementChild);
+            check.firstElementChild.addEventListener('change', inputChanged)
+        });
+
+        window.addEventListener('keydown', e => shift_key_pressed = e.shiftKey, { capture: true })
+        window.addEventListener('keyup', e => shift_key_pressed = e.shiftKey, { capture: true })
+    </script>
+</body>
+
+</html>
