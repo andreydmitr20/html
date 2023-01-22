@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper {
+            flex: auto;
+            width: 80%;
+        }
+
+        #btn-add:hover,
+        #btn-add:focus {
+            cursor: pointer;
+        }
+
+        .todo-list {
+            list-style: none;
+        }
+
+        .todo-item {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+        }
+
+        .todo-item:nth-of-type(even) {
+            background-color: rgb(218, 238, 238);
+        }
+
+        .todo-item:nth-of-type(odd) {
+            background-color: rgb(193, 245, 245);
+        }
+
+        .todo-delete {
+            color: red;
+            position: absolute;
+            right: 0.4rem;
+            top: -1rem;
+        }
+
+        ::selection {
+            background: #f7a494;
+        }
+
+        .todo-item.todo-selected {
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1 id="todo">ToDo List</h1>
+        <label for="todo-search">Search: </label>
+        <input type="text" name="todo-search" id="todo-search">
+        <button id="todo-add">Add Item</button>
+        <hr>
+        <ul id="todo-list">
+
+        </ul>
+    </div>
+
+
+    <script>
+        const todoSearch = document.querySelector('#todo-search')
+        const todoAdd = document.querySelector('#todo-add')
+        const todoList = document.querySelector('#todo-list');
+        // selected by keyboard
+        let selectedItem
+        // prev search value
+        let prevSearchValue
+        // item
+        function Item(id, text, checked) {
+
+            return {
+                id, checked, text
+            }
+        }
+        const localStorageItemName = 'ToDo Items'
+        const todoItems = JSON.parse(localStorage.getItem(localStorageItemName)) || []
+        const localStorageItemNextId = 'ToDo NextId'
+        let todoItemNextId = localStorage.getItem(localStorageItemNextId)
+        if (!(+todoItemNextId > 0)) {
+            localStorage.setItem(localStorageItemNextId, '1')
+        }
+
+        // itemHTML
+        const itemHTML = (item) =>
+            `<li class="todo-item" data-id=${item.id}>
+                    <input type="checkbox" ${item.checked ? "checked" : ''}>
+                    <label >${item.text}</label>
+                    <p class="todo-delete">X</p>            
+                </li>`
+
+        // show items
+        const populateItems = (items) => {
+            todoList.innerHTML = items.map(item => itemHTML(item)
+            ).join('')
+        }
+
+        populateItems(todoItems);
+
+        // save to local storage
+        const saveItems = (items) => {
+            localStorage.setItem(localStorageItemName,
+                JSON.stringify(items))
+        }
+        const saveNextItemId = () => {
+            localStorage.setItem(localStorageItemNextId,
+                todoItemNextId)
+        }
+        // add Item
+        const addItem = () => {
+            const value = todoSearch.value.trim()
+            if (value.length !== 0) {
+                let id = todoItemNextId++
+                saveNextItemId()
+                todoItems.push(new Item(id, value, false))
+                saveItems(todoItems)
+                todoSearch.value = ''
+                populateItems(todoItems)
+            }
+        }
+
+        const focusSearch = () => {
+            todoSearch.focus()
+            todoSearch.selectionEnd = todoSearch.value.length;
+            todoSearch.selectionStart = todoSearch.selectionEnd
+        }
+        // doSearch
+        const doSearch = () => {
+            const value = todoSearch.value.trim()
+            if (value != prevSearchValue) {
+                prevSearchValue = value
+                populateItems(todoItems.filter(item => {
+                    return item.text.indexOf(value) !== -1
+                }))
+            }
+        }
+
+        const findItemIndexById = id => {
+            let index = -1
+            todoItems.find(item => {
+                index++
+                // console.log(index, item.id, id);
+                return item.id === +id
+            })
+            return index
+        }
+
+        // selectItem
+        const selectItem = node => {
+            let id = node.dataset.id
+            if (id !== undefined) {
+                let index = findItemIndexById(id)
+                todoList.innerHTML = itemHTML(todoItems[index])
+                prevSearchValue = todoItems[index].text;
+                todoSearch.value = prevSearchValue
+            }
+        }
+        const deleteItem = node => {
+            let id = node.dataset.id
+            if (id !== undefined) {
+                let index = findItemIndexById(id)
+
+                if (confirm(`Are you sure you want to delete 
+                            "${todoItems[index].text}"?`)) {
+                    // delete
+                    todoItems.splice(
+                        index,
+                        1)
+                    saveItems(todoItems)
+                    todoSearch.value = ''
+                    populateItems(todoItems)
+                }
+
+            }
+        }
+        const selectOrDeleteItem = (e) => {
+            let etag = e.target.tagName.toLowerCase()
+            if (e.target.classList.contains('todo-delete')) {
+                // delete
+                deleteItem(e.target.parentNode)
+            } else if (etag === 'label') {
+                // select
+                selectItem(e.target.parentNode)
+            } else if (etag === 'li') {
+                // select
+                selectItem(e.target)
+            } else if (etag === 'input') {
+                let index = findItemIndexById(e.target.parentNode.dataset.id)
+                todoItems[index].checked = e.target.checked
+                saveItems(todoItems)
+            }
+            focusSearch()
+        }
+
+
+
+
+        // keyboard
+        const toggleItemSelected = () => selectedItem.classList.toggle('todo-selected')
+        const keyNavigate = e => {
+            if (e.target === todoSearch &&
+                e.keyCode === 13
+                && e.ctrlKey) {
+                // add
+                addItem()
+                focusSearch()
+                return
+            }
+
+            const items = todoList.childNodes;
+            if (items.length == 0) {
+                selectedItem = undefined;
+                focusSearch()
+                return
+            }
+
+            if (selectedItem === undefined) {
+                selectedItem = items[0]
+                toggleItemSelected()
+                focusSearch()
+                return
+            }
+            // console.log(e.keyCode)
+            switch (e.keyCode) {
+                case 38: // up
+                    // e.preventDefault();
+                    toggleItemSelected()
+                    if (selectedItem.previousSibling !== null) {
+                        selectedItem = selectedItem.previousSibling
+                    } else {
+                        selectedItem = items[items.length - 1]
+                    }
+                    toggleItemSelected()
+                    break
+                case 40: // down
+                    // e.preventDefault();
+                    toggleItemSelected()
+                    if (selectedItem.nextSibling !== null) {
+                        selectedItem = selectedItem.nextSibling
+                    } else {
+                        selectedItem = items[0]
+                    }
+                    toggleItemSelected()
+                    break
+                case 13: // enter 
+                    // select
+                    selectItem(selectedItem)
+                    break
+                case 27: // escape
+                    todoSearch.value = ''
+                    populateItems(todoItems)
+                    break
+                case 46: // delete
+                    deleteItem(selectedItem)
+                    break
+
+                default:
+
+                    break
+            }
+            focusSearch()
+        }
+
+
+        // events
+        todoAdd.addEventListener('click', addItem)
+        todoSearch.addEventListener('keyup', doSearch)
+        todoSearch.addEventListener('click', (e) => {
+            e.target.setSelectionRange(0, e.target.value.length)
+        })
+        todoList.addEventListener('click', selectOrDeleteItem)
+        document.addEventListener('keyup', keyNavigate)
+        document.addEventListener('click', () => {
+            focusSearch()
+
+        })
+
+
+    </script>
+</body>
+
+</html>
