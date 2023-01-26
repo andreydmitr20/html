@@ -103,7 +103,7 @@
 
     <script>
         const tabs = document.querySelectorAll('.tab')
-        const timeP = document.getElementById('timeP')
+        const timeP = document.querySelector('#timeP')
         const audio = document.querySelectorAll('audio')[0]
 
         const btns = document.querySelectorAll('.btn')
@@ -151,7 +151,7 @@
         const resetTime = () => {
             if (intervalId !== undefined) {
                 clearInterval(intervalId)
-                intervalid = undefined
+                intervalId = undefined
             }
             curTime = new Date(2023, 01, 23, 0, minStart, 0, 0)
             showTime()
