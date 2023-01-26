@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .tab-wrapper {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tab {
+            padding: 1vw 2vw;
+            margin: 0.1vw;
+            background: rgb(116, 173, 231);
+            color: white
+        }
+
+        .tab:hover,
+        .tab:focus {
+            cursor: pointer;
+        }
+
+        .selected-tab {
+            background: blue;
+        }
+
+
+
+        #timeP {
+            font-size: 10vw;
+            text-align: center;
+            padding: 0;
+            margin: 2vw auto;
+        }
+
+        #btnStart {
+            background-color: red;
+            color: white;
+        }
+
+        #btnStop {
+            background-color: green;
+            color: white;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+
+        }
+
+        .btn {
+            margin: 1vw;
+            padding: 1vw 3vw;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+
+<body>
+    <div class="tab-wrapper">
+        <div id="pomodoro" class="tab">Pomodoro</div>
+        <div id="short-break" class="tab">Short Break</div>
+        <div id="long-break" class="tab">Long Break</div>
+    </div>
+
+    <p id="timeP"></p>
+
+    <div class="btn-wrapper">
+        <button id="btnStart" class="btn hide">Start</button>
+        <button id="btnStop" class="btn hide">Stop</button>
+        <button id="btnReset" class="btn hide">Reset</button>
+    </div>
+
+
+    <audio src="bep-004.mp3"></audio>
+
+
+
+
+
+
+
+    <script>
+        const tabs = document.querySelectorAll('.tab')
+        const timeP = document.getElementById('timeP')
+        const audio = document.querySelectorAll('audio')[0]
+
+        const btns = document.querySelectorAll('.btn')
+        const btnStart = document.querySelector('#btnStart')
+        const btnStop = document.querySelector('#btnStop')
+        const btnReset = document.querySelector('#btnReset')
+
+        let intervalId
+        let curTime
+        let minStart
+
+        const tabClick = e => {
+
+            tabs.forEach(tab => {
+                tab.classList.remove('selected-tab')
+            })
+            e.target.classList.add('selected-tab')
+            if (e.target.id.toLowerCase() === 'pomodoro') {
+                minStart = 25
+            } else if (e.target.id.toLowerCase() === 'short-break') {
+                minStart = 1
+            } else if (e.target.id.toLowerCase() === 'long-break') {
+                minStart = 10
+            }
+            resetTime()
+            // swow btn
+            btns.forEach(btn => {
+                btn.classList.remove('hide')
+            })
+        }
+
+
+
+        const showTime = () => {
+            let sec = curTime.getSeconds()
+            secStr = ''
+            if (sec < 10) secStr = '0'
+
+            let timeStr = curTime.getMinutes().toString() +
+                ':' + secStr + sec.toString()
+            document.title = '( ' + timeStr + ' ) TomatoTimer'
+            timeP.innerText = timeStr;
+        }
+
+        const resetTime = () => {
+            if (intervalId !== undefined) {
+                clearInterval(intervalId)
+                intervalid = undefined
+            }
+            curTime = new Date(2023, 01, 23, 0, minStart, 0, 0)
+            showTime()
+        }
+
+        const btnStartClick = e => {
+            if (intervalId !== undefined) return
+
+            resetTime()
+
+            intervalId = setInterval(() => {
+                curTime.setTime(curTime.getTime() - 1000);
+                showTime();
+                if ((curTime.getMinutes() === 0) &&
+                    (curTime.getSeconds() === 0)) {
+                    clearInterval(intervalId)
+                    intervalId = undefined
+                    audio.volume = 1;
+                    audio.play()
+                }
+
+            }, 1000)
+        }
+
+        const btnStopClick = () => {
+            clearInterval(intervalId)
+            intervalId = undefined
+        }
+
+        const btnResetClick = () => {
+            resetTime()
+        }
+
+        btnStart.addEventListener('click', btnStartClick)
+        btnStop.addEventListener('click', btnStopClick)
+        btnReset.addEventListener('click', btnResetClick)
+
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', tabClick)
+        })
+
+
+    </script>
+</body>
+
+</html>
