@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  opacity: 0.5;
+}
+
+#pl-len {
+  flex: auto;
+}
+#pl-len input {
+  width: 2rem;
+  text-align: center;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 1rem;
+}
+
+#pl-chars {
+  flex: auto;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.pl-char {
+  flex: auto;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  display: inline-block;
+  color: black;
+  border: 0.2rem solid blue;
+}
+
+#pl-info {
+  flex: auto;
+  margin-top: 1rem;
+  color: green;
+  opacity: 0.5;
+}
