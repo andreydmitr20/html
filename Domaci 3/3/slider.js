@@ -1,6 +1,8 @@
 ;(function picSlider (sliderId) {
   const picSliderWrapper = document.querySelector('#pic-slider-wrapper')
   picSliderWrapper.style.position = 'relative'
+  // to can be focused
+  picSliderWrapper.setAttribute('tabindex', '0')
 
   const arrowClick = event => {
     if (event.target.classList.contains('arrow-left')) {
@@ -20,6 +22,7 @@
     arrow.style.color = 'white'
     // arrow.style.opacity = '0.5'
     arrow.style.fontSize = `3rem`
+    arrow.style.cursor = `pointer`
 
     if (direction === 'left') {
       arrow.style.left = '0'
@@ -48,9 +51,34 @@
   }
 
   const pic = createPicElement()
-
   const leftArrow = createArrowElement('left')
   const rightArrow = createArrowElement('right')
+
+  const picSliderWrapperKeyUp = event => {
+    // console.log(event)
+    switch (event.keyCode) {
+      case 39: //right
+        console.log('right')
+        break
+      case 37: //left
+        console.log('left')
+        break
+    }
+  }
+
+  const picSliderWrapperMouseEnter = event => {
+    console.log('enter')
+    picSliderWrapper.focus()
+    picSliderWrapper.addEventListener('keyup', picSliderWrapperKeyUp)
+  }
+
+  const picSliderWrapperMouseLeave = event => {
+    console.log('leave')
+    picSliderWrapper.removeEventListener('keyup', picSliderWrapperKeyUp)
+  }
+
+  picSliderWrapper.addEventListener('mouseenter', picSliderWrapperMouseEnter)
+  picSliderWrapper.addEventListener('mouseleave', picSliderWrapperMouseLeave)
 
   //
   return {
