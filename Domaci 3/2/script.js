@@ -115,6 +115,7 @@ const changeLen = event => {
 }
 
 const clickAdd = event => {
+  if (plLen === maxPlLen) return
   // insert char
   plLen++
   plLenInput.value = plLen

@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+}
+
+#pic-slider-wrapper {
+  width: 100%;
+  height: 30vw;
+  background-color: blue;
+}
