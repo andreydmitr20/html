@@ -3,6 +3,21 @@ const plLenInput = document.querySelector('#pl-len input')
 const plLenLabel = document.querySelector('#pl-len label')
 const plChars = document.querySelector('#pl-chars')
 const plInfo = document.querySelector('#pl-info')
+const plAdd = document.querySelector('#pl-add')
+const plDel = document.querySelector('#pl-del')
+
+let selectedCharElement
+
+const newChar = () => {
+  const char = document.createElement('input')
+  char.className = 'pl-char'
+  char.setAttribute('type', 'text')
+  // char.addEventListener('input', charChanged)
+  char.addEventListener('focus', charFocus)
+  char.addEventListener('focusout', charFocusOut)
+  char.addEventListener('keyup', charKeyUp)
+  return char
+}
 
 const maxPlLen = 40
 let plLen
@@ -11,10 +26,10 @@ plLenLabel.textContent += ` ( max: ${maxPlLen} chars):`
 // return true if inStr is a palindrome
 const isPalindrome = inStr => {
   if (inStr === undefined || inStr === null) return false
+  inStr = inStr.trim().toLowerCase()
   lenStr = inStr.length
   if (lenStr === 0) return true
 
-  inStr = inStr.toLowerCase()
   startI = 0
   endI = lenStr - 1
   while (startI < endI) {
@@ -46,6 +61,141 @@ const showInfo = () => {
   }
 }
 
+const charFocus = event => {
+  //
+  selectedCharElement = event.target
+
+  plAdd.style.display = 'block'
+  plAdd.style.top = `${
+    selectedCharElement.offsetTop - plAdd.clientHeight / 2
+  }px`
+  plAdd.style.left = `${selectedCharElement.offsetLeft}px`
+
+  plDel.style.display = 'block'
+  plDel.style.top = `${
+    selectedCharElement.offsetTop - plAdd.clientHeight / 2
+  }px`
+  plDel.style.left = `${
+    selectedCharElement.offsetLeft +
+    selectedCharElement.clientWidth -
+    plAdd.clientWidth / 2
+  }px`
+}
+
+let timeoutHideAddDelId
+const charFocusOut = event => {
+  //
+  if (timeoutHideAddDelId !== undefined) {
+    clearTimeout(timeoutHideAddDelId)
+  }
+  timeoutHideAddDelId = setTimeout(() => {
+    if (!document.activeElement.classList.contains('pl-char')) {
+      plAdd.style.display = 'none'
+      plDel.style.display = 'none'
+      timeoutHideAddDelId = undefined
+    }
+  }, 100)
+}
+
+const changeLen = event => {
+  // console.log(event.target.value)
+  plLen = event.target.value
+  if (plLen === null || plLen === undefined || plLen === '') {
+    plLen = 1
+  } else if (plLen > maxPlLen) {
+    plLen = maxPlLen
+  }
+  event.target.value = plLen.toString()
+
+  // make new char places
+  plChars.innerHTML = ''
+  for (let i = 0; i < plLen; i++) plChars.appendChild(newChar())
+  plChars.querySelectorAll('.pl-char')[0].focus()
+  plInfo.textContent = ''
+}
+
+const clickAdd = event => {
+  // insert char
+  plLen++
+  plLenInput.value = plLen
+  const next = selectedCharElement.nextSibling
+  let char = newChar()
+  if (next !== null) {
+    // insertbefore
+    selectedCharElement.parentNode.insertBefore(char, next)
+  } else {
+    selectedCharElement.parentNode.appendChild(char)
+  }
+  showInfo()
+  char.focus()
+}
+
+const clickDel = event => {
+  if (plLen === 1) {
+    selectedCharElement.focus()
+    return
+  }
+
+  plLen--
+  plLenInput.value = plLen
+  let next = selectedCharElement.nextSibling
+  if (next === null) {
+    next = selectedCharElement.previousSibling
+  }
+  selectedCharElement.remove()
+  showInfo()
+  next.focus()
+}
+
+const leftKeyPressed = event => {
+  let prev = event.target.previousSibling
+  if (prev !== null) {
+    prev.focus()
+  } else {
+    plChars.lastChild.focus()
+  }
+}
+const rightKeyPressed = event => {
+  let next = event.target.nextSibling
+  if (next !== null) {
+    next.focus()
+  } else {
+    plChars.firstChild.focus()
+  }
+}
+
+const charKeyUp = event => {
+  // event.preventDefault()
+  switch (event.keyCode) {
+    case 45: // insert as add
+      clickAdd(event)
+      return
+      break
+    case 46: // delete as del
+      clickDel(event)
+      return
+      break
+    case 39: //right
+      rightKeyPressed(event)
+      return
+      break
+    case 37: //left
+      leftKeyPressed(event)
+      return
+      break
+  }
+  let ch = event.key
+  if (ch.length > 1) return
+  if (ch === ' ' || (ch.toLowerCase() >= 'a' && ch.toLowerCase() <= 'z')) {
+    // Ok
+    event.target.value = ch
+    rightKeyPressed(event)
+  } else {
+    event.target.value = ''
+  }
+  showInfo()
+}
+
 const charChanged = event => {
   let char = event.target.value.toString().toLowerCase()
   if (char.length === 1 && (char === ' ' || (char >= 'a' && char <= 'z'))) {
@@ -62,35 +212,10 @@ const charChanged = event => {
   }
   showInfo()
 }
-
-const changeLen = event => {
-  // console.log(event.target.value)
-  plLen = event.target.value
-  if (plLen === null || plLen === undefined || plLen === '') {
-    plLen = 1
-  } else if (plLen > maxPlLen) {
-    plLen = maxPlLen
-  }
-  event.target.value = plLen.toString()
-
-  // make new char places
-  let html = ''
-  for (let i = 0; i < plLen; i++) html += `<input class="pl-char" type="text">`
-  plChars.innerHTML = html
-  const chars = plChars.children
-  Array.from(chars).forEach(elem =>
-    elem.addEventListener('change', charChanged)
-  )
-  plChars.querySelectorAll('.pl-char')[0].focus()
-  plInfo.textContent = ''
-}
-
-// const plLenInputKeyUp = event => {
-//   if (event.keyCode === 13) plLenInput.focus()
-// }
 // events
 plLenInput.addEventListener('change', changeLen)
-// plLenInput.addEventListener('onkeyup', plLenInputKeyUp)
+plAdd.addEventListener('click', clickAdd)
+plDel.addEventListener('click', clickDel)
 
 // start
-// plLenInput.focus()
+plLenInput.focus()
