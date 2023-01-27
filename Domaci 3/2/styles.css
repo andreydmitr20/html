@@ -29,15 +29,17 @@ h1 {
 
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  /* align-content: center; */
+  /* justify-items: flex-start; */
 }
 .pl-char {
-  flex: auto;
+  flex-grow: 0;
   width: 2rem;
   height: 2rem;
   text-align: center;
-  display: inline-block;
+  /* display: inline-block; */
   color: black;
   border: 0.2rem solid blue;
 }
@@ -45,6 +47,7 @@ h1 {
 #pl-info {
   flex: auto;
   margin-top: 1rem;
+  font-size: 2rem;
   color: green;
   opacity: 0.5;
 }
