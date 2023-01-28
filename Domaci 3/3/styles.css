@@ -6,8 +6,14 @@ h1 {
   text-align: center;
 }
 
-#pic-slider-wrapper {
-  width: 100%;
+#pic-slider1 {
+  float: left;
+  width: 50vw;
   height: 30vw;
-  background-color: blue;
+}
+
+#pic-slider2 {
+  float: right;
+  width: 30vw;
+  height: 50vw;
 }
