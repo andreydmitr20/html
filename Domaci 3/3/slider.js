@@ -175,7 +175,7 @@ function picSlider (sliderId, imgArr) {
     // border : '1px solid black',
     position: 'relative',
     overflow: 'hidden',
-    padding: '2vw',
+    padding: '1vw',
     fontFamily: 'sans-serif',
     height: 'auto'
   })
