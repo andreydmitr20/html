@@ -1,28 +1,24 @@
 function picSlider (sliderId, imgArr) {
-  const picSliderWrapper = document.querySelector(sliderId)
-
-  // picSliderWrapper.style.border = '1px solid black'
-  const setPicSliderWrapperStyle = () => {
-    picSliderWrapper.style.position = 'relative'
-    picSliderWrapper.style.overflow = 'hidden'
-    picSliderWrapper.style.padding = '2vw'
-    picSliderWrapper.style.fontFamily = 'sans-serif'
-    picSliderWrapper.style.height = 'auto'
+  const setStyle = (element, styleObj) => {
+    for (let style in styleObj) element.style[style] = styleObj[style]
   }
+
+  const saveStyle = (element, styleArray) => {
+    let obj = {}
+    styleArray.forEach(style => (obj[style] = element.style[style]))
+    return obj
+  }
+
   const createPicElement = () => {
     const pic = document.createElement('img')
-
-    // pic.style.border = '1px solid green'
-
-    /* to let left and right arrows be simmetricically
-    we have to remove  pic.style.height =  */
-    pic.style.width = '100%'
-
-    pic.style.zIndex = '1'
-    pic.style.objectFit = 'contain'
-    pic.style.position = 'relative'
-    pic.style.borderRadius = '0.3rem'
-
+    setStyle(pic, {
+      // border : '1px solid green',
+      width: '100%',
+      zIndex: '1',
+      objectFit: 'contain',
+      position: 'relative',
+      borderRadius: '0.3rem'
+    })
     picSliderWrapper.appendChild(pic)
     return pic
   }
@@ -37,24 +33,25 @@ function picSlider (sliderId, imgArr) {
 
   const createArrowElement = direction => {
     const arrow = document.createElement('div')
+    setStyle(arrow, {
+      display: 'none',
+      position: 'absolute',
+      zIndex: '2',
+      filter: 'drop-shadow(0 0 0.2rem black)',
+      color: 'white',
+      opacity: '0.6',
+      fontSize: '3rem',
+      cursor: 'pointer',
+      padding: '0.2rem'
+    })
     arrow.className = direction
-
-    arrow.style.display = 'none'
-    arrow.style.position = 'absolute'
-    arrow.style.zIndex = '2'
-    arrow.style.filter = 'drop-shadow(0 0 0.2rem black)'
-    arrow.style.color = 'white'
-    arrow.style.opacity = '0.6'
-    arrow.style.fontSize = '3rem'
-    arrow.style.cursor = 'pointer'
-    arrow.style.padding = '0.2rem'
-
     if (direction === 'left') {
       arrow.textContent = '<'
+      arrow.style.left = '1rem'
     } else {
       arrow.textContent = '>'
+      arrow.style.right = '1rem'
     }
-
     picSliderWrapper.appendChild(arrow)
 
     arrow.addEventListener('click', arrowClick)
@@ -66,18 +63,11 @@ function picSlider (sliderId, imgArr) {
     arrow.style.top = `${
       picSliderWrapper.clientHeight / 2 - arrow.clientHeight / 2
     }px`
-    if (arrow.classList.contains('left')) {
-      arrow.style.left = '1rem'
-    } else {
-      arrow.style.right = '1rem'
-    }
   }
   const onResize = event => {
     arrowOnResize(leftArrow)
     arrowOnResize(rightArrow)
   }
-  new ResizeObserver(onResize).observe(picSliderWrapper)
-
   const showPic = i => {
     if (i === undefined) i = 0
     pic.setAttribute('src', 'img/' + imgArr[i] + '.jpeg')
@@ -128,41 +118,39 @@ function picSlider (sliderId, imgArr) {
     rightArrow.style.display = 'none'
   }
 
-  let saveStyleArr
-  const savePicSliderWrapperStyle = () => {
-    return [
-      picSliderWrapper.style.display,
-      picSliderWrapper.style.marginLeft,
-      picSliderWrapper.style.marginTop,
-      picSliderWrapper.style.width,
-      picSliderWrapper.style.overflow
-    ]
-  }
-  const restorePicSliderWrapperStyle = arr => {
-    picSliderWrapper.style.display = arr[0]
-    picSliderWrapper.style.marginLeft = arr[1]
-    picSliderWrapper.style.marginTop = arr[2]
-    picSliderWrapper.style.width = arr[3]
-    picSliderWrapper.style.overflow = arr[4]
-  }
+  let saveStyleObj
   const bigPicClick = event => {
     pic.removeEventListener('click', bigPicClick)
     //save pic style
-    saveStyleArr = savePicSliderWrapperStyle()
+    saveStyleObj = saveStyle(picSliderWrapper, [
+      'display',
+      'marginLeft',
+      'marginTop',
+      'width',
+      'overflow'
+    ])
 
-    restorePicSliderWrapperStyle(['block', '5vw', '5vw', '90vw', ''])
+    setStyle(picSliderWrapper, {
+      display: 'block',
+      marginLeft: '5vw',
+      marginTop: '5vw',
+      width: '90vw',
+      overflow: ''
+    })
 
     let closeBtnElement = document.createElement('div')
     closeBtnElement.textContent = 'x'
-    closeBtnElement.style.position = 'absolute'
-    closeBtnElement.style.zIndex = '3'
-    closeBtnElement.style.filter = 'drop-shadow(0 0 0.3rem black)'
-    closeBtnElement.style.color = 'white'
-    closeBtnElement.style.opacity = '0.6'
-    closeBtnElement.style.fontSize = '3rem'
-    closeBtnElement.style.cursor = 'pointer'
-    closeBtnElement.style.top = '0.5rem'
-    closeBtnElement.style.right = '2rem' //`${closeBtn.clientWidth * 3}px`
+    setStyle(closeBtnElement, {
+      position: 'absolute',
+      zIndex: '3',
+      filter: 'drop-shadow(0 0 0.3rem black)',
+      color: 'white',
+      opacity: '0.6',
+      fontSize: '3rem',
+      cursor: 'pointer',
+      top: '0.5rem',
+      right: '2rem'
+    })
 
     picSliderWrapper.appendChild(closeBtnElement)
     closeBtnElement.addEventListener('click', closeBigPicClick)
@@ -174,18 +162,27 @@ function picSlider (sliderId, imgArr) {
     closeBtnElement = undefined
 
     // reset pic style
-    restorePicSliderWrapperStyle(saveStyleArr)
+    setStyle(picSliderWrapper, saveStyleObj)
     pic.addEventListener('click', bigPicClick)
 
     leftArrow.style.display = 'none'
     rightArrow.style.display = 'none'
   }
 
-  // create
-  setPicSliderWrapperStyle()
+  // initialization
+  const picSliderWrapper = document.querySelector(sliderId)
+  setStyle(picSliderWrapper, {
+    // border : '1px solid black',
+    position: 'relative',
+    overflow: 'hidden',
+    padding: '2vw',
+    fontFamily: 'sans-serif',
+    height: 'auto'
+  })
   const pic = createPicElement()
   const leftArrow = createArrowElement('left')
   const rightArrow = createArrowElement('right')
+  new ResizeObserver(onResize).observe(picSliderWrapper)
 
   picSliderWrapper.addEventListener('mouseenter', picSliderWrapperMouseEnter)
   picSliderWrapper.addEventListener('mouseleave', picSliderWrapperMouseLeave)
