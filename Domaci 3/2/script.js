@@ -66,19 +66,17 @@ const charFocus = event => {
   selectedCharElement = event.target
 
   plAdd.style.display = 'block'
-  plAdd.style.top = `${
-    selectedCharElement.offsetTop - plAdd.clientHeight / 2
+  plAdd.style.top = `${selectedCharElement.offsetTop - plAdd.clientHeight}px`
+  plAdd.style.left = `${
+    selectedCharElement.offsetLeft - plAdd.clientWidth / 3
   }px`
-  plAdd.style.left = `${selectedCharElement.offsetLeft}px`
 
   plDel.style.display = 'block'
-  plDel.style.top = `${
-    selectedCharElement.offsetTop - plAdd.clientHeight / 2
-  }px`
+  plDel.style.top = `${selectedCharElement.offsetTop - plDel.clientHeight}px`
   plDel.style.left = `${
     selectedCharElement.offsetLeft +
     selectedCharElement.clientWidth -
-    plAdd.clientWidth / 2
+    plDel.clientWidth / 3
   }px`
 }
 
@@ -94,7 +92,7 @@ const charFocusOut = event => {
       plDel.style.display = 'none'
       timeoutHideAddDelId = undefined
     }
-  }, 100)
+  }, 300)
 }
 
 const changeLen = event => {
@@ -132,11 +130,10 @@ const clickAdd = event => {
 }
 
 const clickDel = event => {
-  if (plLen === 1) {
+  if (plLen <= 1) {
     selectedCharElement.focus()
     return
   }
-
   plLen--
   plLenInput.value = plLen
   let next = selectedCharElement.nextSibling
