@@ -83,17 +83,19 @@ function picSlider (sliderId, imgArr) {
   }
 
   const arrowOnResize = arrow => {
-    arrow.style.top = `${
-      picSliderWrapper.clientHeight / 2 - arrow.clientHeight / 2
-    }px`
+    if (bigPicMode)
+      arrow.style.top = `${pic.clientHeight / 2 - arrow.clientHeight / 2}px`
+    else
+      arrow.style.top = `${
+        picSliderWrapper.clientHeight / 2 - arrow.clientHeight / 2
+      }px`
   }
   const onResize = event => {
-    console.log('!')
     pic.style.width = `${picSliderWrapper.clientWidth}px`
     if (!bigPicMode) pic.style.height = `${picSliderWrapper.clientHeight}px`
-    else pic.style.height = 'auto'
-    // pic.style.width = '100%'
-    // pic.style.height = 'auto'
+    else {
+      pic.style.height = 'auto'
+    }
     arrowOnResize(leftArrow)
     arrowOnResize(rightArrow)
   }
@@ -103,6 +105,7 @@ function picSlider (sliderId, imgArr) {
     picElement.setAttribute('data-i', i)
     setTimeout(onResize, 10)
   }
+  let isAnimationInProgress = false
   const onPicAnimationEnd = (event, picSlide) => {
     let picOld = event.target
     pic = picSlide
@@ -113,7 +116,9 @@ function picSlider (sliderId, imgArr) {
     pic.style.left = '0'
 
     picOld.remove()
+
     showArrows(isMousePointerInsidePic)
+    isAnimationInProgress = false
     onResize()
   }
   const onLeftArrowClick = () => {
@@ -133,7 +138,7 @@ function picSlider (sliderId, imgArr) {
     pic.addEventListener('transitionend', event =>
       onPicAnimationEnd(event, picSlide)
     )
-
+    isAnimationInProgress = true
     pic.style.transition = 'transform 0.5s'
     picSlide.style.transition = 'transform 0.5s'
     pic.style.transform = `translateX(100%)`
@@ -157,6 +162,7 @@ function picSlider (sliderId, imgArr) {
     pic.addEventListener('transitionend', event =>
       onPicAnimationEnd(event, picSlide)
     )
+    isAnimationInProgress = true
     pic.style.transition = 'transform 0.5s'
     picSlide.style.transition = 'transform 0.5s'
     pic.style.transform = `translateX(-100%)`
@@ -214,7 +220,7 @@ function picSlider (sliderId, imgArr) {
       marginLeft: '5vw',
       marginTop: '5vw',
       width: '90vw',
-      height: 'auto',
+      height: '100%',
       overflow: '',
       zIndex: '5'
     })
