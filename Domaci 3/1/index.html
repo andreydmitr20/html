@@ -12,11 +12,28 @@
 <body>
 
     <h1>X/O GAME</h1>
+    <div id="xo-grid">
+        <div id="xo-gamerx">
+            <label for="gamerx">
+                <input id="gamerx-color" type="color">
+                Gamer X:
+            </label>
+            <input id="gamerx" type="text" style='text-transform:uppercase'>
 
-    <label for="gamerx">Gamer X:</label>
-    <input id="gamerx" type="text">
-    <label for="gamero">Gamer O:</label>
-    <input id="gamero" type="text">
+        </div>
+        <div id="xo-gamero">
+            <label for="gamero">
+                <input id="gamero-color" type="color">
+                Gamer O:
+            </label>
+            <input id="gamero" type="text" style='text-transform:uppercase'>
+        </div>
+        <div id="xo-ctrl">
+            <button id="btn-new-game">New<br>Game</button>
+        </div>
+    </div>
+
+    <div id="xo-info"></div>
 
     <div id="xo-game1"></div>
 

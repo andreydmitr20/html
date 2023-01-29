@@ -10,10 +10,55 @@ body {
   align-items: center;
 }
 
-input {
-  flex: auto;
+#xo-grid {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+#xo-gamerx {
+  display: flex;
+  flex-flow: column nowrap;
+}
+#xo-gamero {
+  display: flex;
+  flex-flow: column nowrap;
+}
 
-  width: 10rem;
+input[type="text"] {
+  flex: auto;
+  height: 2rem;
+  width: 8rem;
+  border: none;
   text-align: center;
+
+  font-size: 1rem;
   margin-bottom: 1rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem grey);
+}
+input[type="text"]:disabled {
+  background-color: inherit;
+}
+
+#xo-info {
+  margin: 1rem auto;
+  font-size: 2rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem grey);
+}
+
+#btn-new-game:hover {
+  cursor: pointer;
+}
+#btn-new-game {
+  flex: auto;
+  border: none;
+
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem grey);
+  border-radius: 0.5rem;
+}
+
+#xo-ctrl {
+  height: 3rem;
 }

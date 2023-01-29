@@ -56,18 +56,35 @@ function xoGame (divId, dimension) {
       row--
     }
     if (wonArray.length === dimension) return wonArray
-    return movesToTheEndGame === 0
+
+    let endGame = movesToTheEndGame === 0
+
+    return endGame
   }
   const showWinLine = (arr, color) => {
     for (let i = 0; i < dimension; i++) {
       let xy = `${arr[i][0]}-${arr[i][1]}`
       let cell = xo.querySelector(`[data-xy="${xy}"]`)
-      console.log(cell)
       cell.style.backgroundColor = color
     }
   }
 
+  // start new game
   const startNewGame = () => {
+    let gx = gamerxInput.value.toLowerCase()
+    let go = gameroInput.value.toLowerCase()
+    if (
+      gx === '' ||
+      go === '' ||
+      gx === go ||
+      gamerxInput.style.color === gameroInput.style.color
+    ) {
+      xoInfo.textContent = 'Enter different names and colors'
+      return
+    }
+    xo.style.display = 'flex'
+    xo.style.transform = xoTransform
+
     curGamerChar = 'X'
     for (let row = 0; row < dimension; row++) {
       for (let col = 0; col < dimension; col++) {
@@ -77,13 +94,63 @@ function xoGame (divId, dimension) {
         cell.style.backgroundColor = null
       }
     }
+
     movesToTheEndGame = dimension * dimension
+
+    disableControl(true)
+
+    showMoveInfo()
+  }
+
+  const disableControl = disable => {
+    // console.log(disable)
+    if (disable) {
+      display = 'none'
+    } else {
+      display = 'block'
+    }
+    btnNewGame.style.display = display
+    gamerxInput.disabled = disable
+    gamerxColor.disabled = disable
+    gameroInput.disabled = disable
+    gameroColor.disabled = disable
+  }
+
+  const showMoveInfo = () => {
+    xoInfo.textContent = `MOVE ${
+      curGamerChar === 'X'
+        ? gamerxInput.value.toUpperCase()
+        : gameroInput.value.toUpperCase()
+    }`
+  }
+
+  const showScore = () => {
+    let gamerx = gamerxInput.value.toLowerCase()
+    let gamerxScore = 0
+    if (gamerx !== '') gamerxScore = localStorage.getItem('xo' + gamerx) || '0'
+
+    let gamero = gameroInput.value.toLowerCase()
+    let gameroScore = 0
+    if (gamero !== '') gameroScore = localStorage.getItem('xo' + gamero) || '0'
+
+    xoInfo.textContent = `Score ${gamerxScore} : ${gameroScore}`
+  }
+
+  const xoTransformEnd = event => {
+    if (movesToTheEndGame === 0) {
+      disableControl(false)
+      // get and show score
+      showScore()
+    } else disableControl(true)
   }
 
   const clickCell = event => {
-    console.log(event.target)
-    if (movesToTheEndGame === 0) return
-
+    if (movesToTheEndGame === 0) {
+      xo.style.transform = `rotate(${
+        (Math.random() < 0.5 ? 1 : -1) * Math.random() * 360
+      }deg)`
+      return
+    }
     let xy = event.target.dataset.xy
     if (xy !== undefined) {
       // check if free cell
@@ -96,12 +163,17 @@ function xoGame (divId, dimension) {
 
       xoArray[x][y] = curGamerChar
       movesToTheEndGame--
+
+      let color
+      if (curGamerChar === 'X') color = gamerxInput.style.color
+      else color = gameroInput.style.color
+
       let cell = xo.querySelector(`[data-xy="${xy}"]`)
       cell.innerHTML = `
         <div style="transform:
         rotate(45deg)
         translate(0,0);
-        color:red;
+        color:${color};
         font-size:4rem">
           ${curGamerChar}
         </div>
@@ -111,17 +183,38 @@ function xoGame (divId, dimension) {
       if (check === false) {
         // next gamer
         nextGamer()
+        return
       } else if (check === true) {
         // standoff
-        console.log('standoff')
+        xoInfo.textContent = 'STANDOFF'
       } else {
         // win
-        console.log('win', curGamerChar)
-        // saveResult()
+        let winner =
+          curGamerChar === 'X' ? gamerxInput.value : gameroInput.value
+        xoInfo.textContent = `WINNER is ${winner.toUpperCase()} !`
         movesToTheEndGame = 0
+        // save score
+        let score = localStorage.getItem('xo' + winner)
+        if (score === null || score === undefined) score = 0
+        score++
+        localStorage.setItem('xo' + winner.toLowerCase(), score)
         showWinLine(check, 'blue')
-        // setTimeout(showWinLine, 2000, check, null)
       }
+
+      xo.addEventListener('transformend', xoTransformEnd)
+      xo.style.transform = `rotate(${
+        (Math.random() < 0.5 ? 1 : -1) * Math.random() * 360
+      }deg)`
+
+      // change X and O
+      let val = gamerxInput.value
+      let col = gamerxColor.value
+      gamerxInput.value = gameroInput.value
+      gamerxInput.style.color = gameroColor.value
+      gamerxColor.value = gameroColor.value
+      gameroInput.value = val
+      gameroInput.style.color = col
+      gameroColor.value = col
     }
   }
 
@@ -129,18 +222,44 @@ function xoGame (divId, dimension) {
     if (curGamerChar === 'X') curGamerChar = 'O'
     else curGamerChar = 'X'
     // info
+    showMoveInfo()
   }
-
+  const setGamerXColor = event => {
+    gamerxInput.style.color = event.target.value
+  }
+  const setGamerOColor = event => {
+    gameroInput.style.color = event.target.value
+  }
   // initialization
+  let movesToTheEndGame = 0
+  let curGamerChar
+
+  const xoInfo = document.querySelector('#xo-info')
+
+  const btnNewGame = document.querySelector('#btn-new-game')
+  btnNewGame.addEventListener('click', startNewGame)
+
+  const gamerxColor = document.querySelector('#gamerx-color')
+  gamerxColor.addEventListener('input', setGamerXColor)
+  const gamerxInput = document.querySelector('#gamerx')
+  gamerxInput.addEventListener('input', showScore)
+
+  const gameroColor = document.querySelector('#gamero-color')
+  gameroColor.addEventListener('input', setGamerOColor)
+  const gameroInput = document.querySelector('#gamero')
+  gameroInput.addEventListener('input', showScore)
+
   const xo = document.querySelector(divId)
+  xo.addEventListener('transitionend', xoTransformEnd)
   const xoElemWidth = 5
   const xoTransform = 'rotateX(40deg) rotateZ(-45deg)'
   setStyle(xo, {
     display: 'flex',
     flexFlow: 'row wrap',
     width: `${dimension * xoElemWidth}rem`,
-    transform: xoTransform,
-    marginTop: '2rem'
+    filter: 'drop-shadow(0.2rem 0.2rem 0.2rem grey)',
+    transition: 'all 3s',
+    marginTop: '3rem'
   })
 
   let xoArray = []
@@ -161,8 +280,5 @@ function xoGame (divId, dimension) {
     }
   }
 
-  let movesToTheEndGame
-  let curGamerChar
-  startNewGame()
   return xo
 }
