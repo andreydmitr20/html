@@ -9,17 +9,34 @@ function picSlider (sliderId, imgArr) {
     return obj
   }
 
-  const createPicElement = () => {
+  let bigPicMode = false
+  const createPicElement = direction => {
     const pic = document.createElement('img')
+    let height
+    if (bigPicMode) height = 'auto'
+    else height = `${picSliderWrapper.clientHeight}px`
     setStyle(pic, {
       // border : '1px solid green',
-      width: '100%',
-      zIndex: '1',
+      width: `${picSliderWrapper.clientWidth}px`,
+      height: height,
+      // zIndex: '1',
       objectFit: 'contain',
       position: 'relative',
-      borderRadius: '0.3rem'
+      borderRadius: '0.3rem',
+      padding: '0.2rem',
+      // transition: 'transform 1s'
+      transitionTimingFunction: 'ease-out'
+      // display: 'inline'
     })
-    picSliderWrapper.appendChild(pic)
+    if (direction === 'left' || direction === undefined) {
+      picSliderWrapper.insertBefore(pic, picSliderWrapper.firstChild)
+    } else {
+      picSliderWrapper.insertBefore(
+        pic,
+        picSliderWrapper.firstChild.nextSibling
+      )
+    }
+    if (!bigPicMode) pic.addEventListener('click', bigPicClick)
     return pic
   }
 
@@ -30,7 +47,13 @@ function picSlider (sliderId, imgArr) {
       onRightArrowClick()
     }
   }
-
+  const showArrows = show => {
+    let display
+    if (show) display = 'block'
+    else display = 'none'
+    leftArrow.style.display = display
+    rightArrow.style.display = display
+  }
   const createArrowElement = direction => {
     const arrow = document.createElement('div')
     setStyle(arrow, {
@@ -65,26 +88,80 @@ function picSlider (sliderId, imgArr) {
     }px`
   }
   const onResize = event => {
+    console.log('!')
+    pic.style.width = `${picSliderWrapper.clientWidth}px`
+    if (!bigPicMode) pic.style.height = `${picSliderWrapper.clientHeight}px`
+    else pic.style.height = 'auto'
+    // pic.style.width = '100%'
+    // pic.style.height = 'auto'
     arrowOnResize(leftArrow)
     arrowOnResize(rightArrow)
   }
-  const showPic = i => {
+  const showPic = (i, picElement) => {
     if (i === undefined) i = 0
-    pic.setAttribute('src', 'img/' + imgArr[i] + '.jpeg')
-    pic.setAttribute('data-i', i)
+    picElement.setAttribute('src', 'img/' + imgArr[i] + '.jpeg')
+    picElement.setAttribute('data-i', i)
     setTimeout(onResize, 10)
+  }
+  const onPicAnimationEnd = (event, picSlide) => {
+    let picOld = event.target
+    pic = picSlide
+    pic.style.transition = null
+
+    pic.style.transform = null
+    pic.style.top = '0'
+    pic.style.left = '0'
+
+    picOld.remove()
+    showArrows(isMousePointerInsidePic)
+    onResize()
   }
   const onLeftArrowClick = () => {
     let i = pic.dataset.i
     if (i == 0) i = imgArr.length - 1
     else i--
-    showPic(i)
+
+    pic.style.top = `${-pic.clientHeight - 4}px`
+    pic.style.left = '0'
+
+    let picSlide = createPicElement('left')
+    showPic(i, picSlide)
+
+    picSlide.style.top = '0'
+    picSlide.style.left = `${-pic.clientWidth}px`
+
+    pic.addEventListener('transitionend', event =>
+      onPicAnimationEnd(event, picSlide)
+    )
+
+    pic.style.transition = 'transform 0.5s'
+    picSlide.style.transition = 'transform 0.5s'
+    pic.style.transform = `translateX(100%)`
+    picSlide.style.transform = `translateX(100%)`
+    showArrows(false)
   }
   const onRightArrowClick = () => {
     let i = pic.dataset.i
     i++
     if (i === imgArr.length) i = 0
-    showPic(i)
+
+    pic.style.top = '0'
+    pic.style.left = '0'
+
+    let picSlide = createPicElement('right')
+    showPic(i, picSlide)
+
+    picSlide.style.top = `${-pic.clientHeight - 4}px`
+    picSlide.style.left = `${pic.clientWidth}px`
+
+    pic.addEventListener('transitionend', event =>
+      onPicAnimationEnd(event, picSlide)
+    )
+    pic.style.transition = 'transform 0.5s'
+    picSlide.style.transition = 'transform 0.5s'
+    pic.style.transform = `translateX(-100%)`
+    picSlide.style.transform = `translateX(-100%)`
+    showArrows(false)
   }
 
   const picSliderWrapperKeyUp = event => {
@@ -98,6 +175,7 @@ function picSlider (sliderId, imgArr) {
         break
     }
   }
+  let isMousePointerInsidePic = false
   const picSliderWrapperMouseEnter = event => {
     // to can be focused
     picSliderWrapper.setAttribute('tabindex', '0')
@@ -105,21 +183,20 @@ function picSlider (sliderId, imgArr) {
 
     picSliderWrapper.addEventListener('keyup', picSliderWrapperKeyUp)
     picSliderWrapper.style.outline = 'none'
-
-    leftArrow.style.display = 'block'
-    rightArrow.style.display = 'block'
+    isMousePointerInsidePic = true
+    showArrows(isMousePointerInsidePic)
     onResize()
   }
   const picSliderWrapperMouseLeave = event => {
     picSliderWrapper.removeEventListener('keyup', picSliderWrapperKeyUp)
     picSliderWrapper.removeAttribute('tabindex')
-
-    leftArrow.style.display = 'none'
-    rightArrow.style.display = 'none'
+    isMousePointerInsidePic = false
+    showArrows(isMousePointerInsidePic)
   }
 
   let saveStyleObj
   const bigPicClick = event => {
+    bigPicMode = true
     pic.removeEventListener('click', bigPicClick)
     //save pic style
     saveStyleObj = saveStyle(picSliderWrapper, [
@@ -127,7 +204,9 @@ function picSlider (sliderId, imgArr) {
       'marginLeft',
       'marginTop',
       'width',
-      'overflow'
+      'height',
+      'overflow',
+      'zIndex'
     ])
 
     setStyle(picSliderWrapper, {
@@ -135,7 +214,9 @@ function picSlider (sliderId, imgArr) {
       marginLeft: '5vw',
       marginTop: '5vw',
       width: '90vw',
-      overflow: ''
+      height: 'auto',
+      overflow: '',
+      zIndex: '5'
     })
 
     let closeBtnElement = document.createElement('div')
@@ -164,6 +245,7 @@ function picSlider (sliderId, imgArr) {
     // reset pic style
     setStyle(picSliderWrapper, saveStyleObj)
     pic.addEventListener('click', bigPicClick)
+    bigPicMode = false
 
     leftArrow.style.display = 'none'
     rightArrow.style.display = 'none'
@@ -172,14 +254,13 @@ function picSlider (sliderId, imgArr) {
   // initialization
   const picSliderWrapper = document.querySelector(sliderId)
   setStyle(picSliderWrapper, {
-    // border : '1px solid black',
+    // border: '1px solid black',
     position: 'relative',
     overflow: 'hidden',
-    padding: '1vw',
-    fontFamily: 'sans-serif',
-    height: 'auto'
+    fontFamily: 'sans-serif'
   })
-  const pic = createPicElement()
+  let pic = createPicElement()
+  // let picSlide // for slide effect
   const leftArrow = createArrowElement('left')
   const rightArrow = createArrowElement('right')
   new ResizeObserver(onResize).observe(picSliderWrapper)
@@ -188,7 +269,7 @@ function picSlider (sliderId, imgArr) {
   picSliderWrapper.addEventListener('mouseleave', picSliderWrapperMouseLeave)
   pic.addEventListener('click', bigPicClick)
 
-  showPic()
+  showPic(0, pic)
 
   return {
     picSliderWrapper

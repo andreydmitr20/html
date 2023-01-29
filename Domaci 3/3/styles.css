@@ -10,10 +10,12 @@ h1 {
   float: left;
   width: 50vw;
   height: 30vw;
+  margin: 0.3rem;
 }
 
 #pic-slider2 {
   float: right;
   width: 30vw;
-  height: 50vw;
+  height: 40vw;
+  margin: 0.3rem;
 }
