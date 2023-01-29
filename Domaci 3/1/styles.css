@@ -40,7 +40,7 @@ input[type="text"]:disabled {
 }
 
 #xo-info {
-  margin: 1rem auto;
+  margin: 3rem auto;
   font-size: 2rem;
   filter: drop-shadow(0.2rem 0.2rem 0.2rem grey);
 }

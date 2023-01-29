@@ -133,7 +133,7 @@ function xoGame (divId, dimension) {
     let gameroScore = 0
     if (gamero !== '') gameroScore = localStorage.getItem('xo' + gamero) || '0'
 
-    xoInfo.textContent = `Score ${gamerxScore} : ${gameroScore}`
+    xoInfo.textContent = `${gamerxScore} : ${gameroScore}`
   }
 
   const xoTransformEnd = event => {
@@ -194,10 +194,11 @@ function xoGame (divId, dimension) {
         xoInfo.textContent = `WINNER is ${winner.toUpperCase()} !`
         movesToTheEndGame = 0
         // save score
-        let score = localStorage.getItem('xo' + winner)
+        let score = localStorage.getItem('xo' + winner.toLowerCase())
         if (score === null || score === undefined) score = 0
         score++
         localStorage.setItem('xo' + winner.toLowerCase(), score)
+        // show winning line
         showWinLine(check, 'blue')
       }
 
