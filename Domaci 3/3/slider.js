@@ -10,7 +10,7 @@ function picSlider (sliderId, imgArr) {
   }
 
   let bigPicMode = false
-  const createPicElement = direction => {
+  const createPicElement = leftDirection => {
     const pic = document.createElement('img')
     let height
     if (bigPicMode) height = 'auto'
@@ -19,16 +19,13 @@ function picSlider (sliderId, imgArr) {
       // border : '1px solid green',
       width: `${picSliderWrapper.clientWidth}px`,
       height: height,
-      // zIndex: '1',
       objectFit: 'contain',
       position: 'relative',
       borderRadius: '0.3rem',
       padding: '0.2rem',
-      // transition: 'transform 1s'
-      transitionTimingFunction: 'ease-out'
-      // display: 'inline'
+      transitionTimingFunction: 'ease-in-out'
     })
-    if (direction === 'left' || direction === undefined) {
+    if (leftDirection || leftDirection === undefined) {
       picSliderWrapper.insertBefore(pic, picSliderWrapper.firstChild)
     } else {
       picSliderWrapper.insertBefore(
@@ -42,9 +39,9 @@ function picSlider (sliderId, imgArr) {
 
   const arrowClick = event => {
     if (event.target.classList.contains('left')) {
-      onLeftArrowClick()
+      onArrowClick(true)
     } else {
-      onRightArrowClick()
+      onArrowClick(false)
     }
   }
   const showArrows = show => {
@@ -105,68 +102,60 @@ function picSlider (sliderId, imgArr) {
     picElement.setAttribute('data-i', i)
     setTimeout(onResize, 10)
   }
-  let isAnimationInProgress = false
-  const onPicAnimationEnd = (event, picSlide) => {
-    let picOld = event.target
-    pic = picSlide
-    pic.style.transition = null
 
+  let isAnimationInProgress = false
+  const onPicAnimationEnd = picSlide => {
+    let picOld = pic
+
+    pic = picSlide
     pic.style.transform = null
     pic.style.top = '0'
     pic.style.left = '0'
+    pic.style.transition = null
 
     picOld.remove()
 
     showArrows(isMousePointerInsidePic)
-    isAnimationInProgress = false
+
     onResize()
+    isAnimationInProgress = false
   }
-  const onLeftArrowClick = () => {
-    let i = pic.dataset.i
-    if (i == 0) i = imgArr.length - 1
-    else i--
 
-    pic.style.top = `${-pic.clientHeight - 4}px`
+  const picTransition = 'transform 0.3s'
+  const picTransform = percent => `translateX(${percent}%)`
+  const onArrowClick = leftDirection => {
+    if (isAnimationInProgress) return
+
+    let i = pic.dataset.i
+    if (leftDirection) {
+      if (i == 0) i = imgArr.length - 1
+      else i--
+      pic.style.top = `${-pic.clientHeight - 4}px`
+    } else {
+      i++
+      if (i === imgArr.length) i = 0
+      pic.style.top = '0'
+    }
     pic.style.left = '0'
 
-    let picSlide = createPicElement('left')
+    let picSlide = createPicElement(leftDirection)
     showPic(i, picSlide)
 
-    picSlide.style.top = '0'
-    picSlide.style.left = `${-pic.clientWidth}px`
-
-    pic.addEventListener('transitionend', event =>
-      onPicAnimationEnd(event, picSlide)
-    )
+    let percent = 100
+    if (leftDirection) {
+      picSlide.style.top = '0'
+      picSlide.style.left = `${-pic.clientWidth}px`
+    } else {
+      percent = -100
+      picSlide.style.top = `${-pic.clientHeight - 4}px`
+      picSlide.style.left = `${pic.clientWidth}px`
+    }
+    pic.addEventListener('transitionend', () => onPicAnimationEnd(picSlide))
     isAnimationInProgress = true
-    pic.style.transition = 'transform 0.5s'
-    picSlide.style.transition = 'transform 0.5s'
-    pic.style.transform = `translateX(100%)`
-    picSlide.style.transform = `translateX(100%)`
-    showArrows(false)
-  }
-  const onRightArrowClick = () => {
-    let i = pic.dataset.i
-    i++
-    if (i === imgArr.length) i = 0
-
-    pic.style.top = '0'
-    pic.style.left = '0'
-
-    let picSlide = createPicElement('right')
-    showPic(i, picSlide)
-
-    picSlide.style.top = `${-pic.clientHeight - 4}px`
-    picSlide.style.left = `${pic.clientWidth}px`
-
-    pic.addEventListener('transitionend', event =>
-      onPicAnimationEnd(event, picSlide)
-    )
-    isAnimationInProgress = true
-    pic.style.transition = 'transform 0.5s'
-    picSlide.style.transition = 'transform 0.5s'
-    pic.style.transform = `translateX(-100%)`
-    picSlide.style.transform = `translateX(-100%)`
+    pic.style.transition = picTransition
+    picSlide.style.transition = picTransition
+    pic.style.transform = picTransform(percent)
+    picSlide.style.transform = picTransform(percent)
     showArrows(false)
   }
 
@@ -174,10 +163,10 @@ function picSlider (sliderId, imgArr) {
     // console.log(event)
     switch (event.keyCode) {
       case 39: //right
-        onRightArrowClick()
+        onArrowClick(false)
         break
       case 37: //left
-        onLeftArrowClick()
+        onArrowClick(true)
         break
     }
   }
