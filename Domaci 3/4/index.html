@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newest TMDB voted films</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        h1 {
+            text-align: center;
+        }
+
+        #film-form {
+            display: flex;
+            flex-flow: row nowrap;
+
+            justify-content: space-around;
+        }
+
+        #film-form label {
+            font-size: 1.4rem;
+            filter: drop-shadow(0 1rem 0.6rem grey);
+        }
+
+        #film-form input {
+            text-align: center;
+            border: none;
+            font-size: 1.4rem;
+            width: 4rem;
+            border-radius: 2rem;
+            padding: 0.2rem;
+
+        }
+
+        #film-table {
+            flex: auto;
+            text-align: center;
+        }
+
+        #film-table table {
+
+
+            margin-top: 2rem;
+            width: 100%;
+            text-align: center;
+            border: 0.1rem solid black;
+            border-collapse: collapse;
+            font-size: 2rem;
+
+        }
+
+
+        #film-table table img {
+            width: 4rem;
+        }
+
+        #film-table table,
+        #film-table table th,
+        #film-table table td {
+            border: 0.1rem solid grey;
+            filter: drop-shadow(0 1rem 0.6rem grey);
+        }
+
+        #film-table .film-date {
+            width: 10rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Newest TMDB voted films</h1>
+    <div id="film-form">
+
+
+        <label for="film-count">
+            Count:
+            <input id="film-count" type="number" min="1">
+        </label>
+
+        <label for="film-min-votes">
+            Minimum votes:
+            <input id="film-min-votes" type="number" min="1">
+        </label>
+
+        <!-- <button id="btn-refresh">Refresh</button> -->
+    </div>
+
+    <div id="film-table"></div>
+
+    <script>
+        const table = document.querySelector('#film-table')
+        // const btn = document.querySelector('#btn-refresh')
+        const filmsCount = document.querySelector('#film-count')
+        const filmsMinVotes = document.querySelector('#film-min-votes')
+
+        const apiKey = 'e75777e5331cfbcab2c4220fce01d3c0'
+        const urlTMDBApiKey = `?api_key=${apiKey}`
+
+        const urlTMDBBegin = `https://api.themoviedb.org/3`
+
+        const urlDiscover = '/discover/movie'
+        const urlGenre = '/genre/movie/list'
+        let genres
+
+        const urlSiteMovie = 'https://www.themoviedb.org/movie/'
+        const urlSitePoster = 'https://image.tmdb.org/t/p/w500'
+
+        const buildGetUrl = (url, objData) => {
+            let uri = urlTMDBBegin + url + urlTMDBApiKey
+            for (let key in objData) {
+                uri += '&' + key + '=' + objData[key]
+            };
+            return uri
+        }
+
+        const checkJson = response => {
+            if (!response.ok) {
+                console.log(response);
+                throw new Error(`${response.status} ${response.statusText} `)
+            }
+            if (response.headers.get('Content-Type').indexOf('application/json') === -1) {
+                throw new Error(`Server has returned not supported data format`)
+            }
+            return response.json()
+        }
+
+        const catchFetchError = err => {
+            console.log(err)
+            table.innerHTML = `
+                <h2>Server 'themoviedb.org' error. Please, try later.</h2>
+            `
+        }
+
+        const makeFilmObj = (
+            maxFilmsCount,
+            minVotes,
+            year) => {
+
+            let prevYear = year - 1
+            let selectedFilms = []
+
+
+            const waitNextFilmsPages = (page, filmsCount) => {
+                // console.log(page, filmsCount);
+                // promises for page=x
+                let promiseYear =
+                    fetch(buildGetUrl(urlDiscover, {
+                        sort_by: 'vote_average.desc',
+                        year: `${year}`,
+                        page: `${page}`,
+                    }))
+                        .then(checkJson)
+                        .catch(catchFetchError)
+
+                let promisePrevYear =
+                    fetch(buildGetUrl(urlDiscover, {
+                        sort_by: 'vote_average.desc',
+                        year: `${prevYear}`,
+                        page: `${page}`,
+                    }))
+                        .then(checkJson)
+                        .catch(catchFetchError)
+
+                Promise.all([promiseYear, promisePrevYear])
+                    .then(jsonArr => {
+
+                        let pageFilms = [...jsonArr[0].results, ...jsonArr[1].results]
+                            .filter(film => {
+
+                                // console.log(film.vote_average, film.votes);
+
+                                // select films by criteries
+                                if (film.vote_average !== 0 &&
+                                    film.vote_count >= minVotes) {
+                                    if (filmsCount > 0) filmsCount--
+                                    return true
+                                }
+                                return false
+                            })
+
+                        selectedFilms = [...selectedFilms, ...pageFilms]
+                        if (filmsCount === 0) {
+                            // process
+
+                            selectedFilms = selectedFilms
+                                .sort((a, b) => {
+                                    if (a.vote_average === b.vote_average) {
+                                        return +b.release_date.slice(0, 4) - +a.release_date.slice(0, 4)
+                                    } else return (b.vote_average - a.vote_average)
+                                })
+                                .slice(0, maxFilmsCount)
+                                .sort((a, b) => {
+                                    if (a.vote_average === b.vote_average) {
+                                        return +a.release_date.slice(0, 4) - +b.release_date.slice(0, 4)
+                                    } else return (a.vote_average - b.vote_average)
+                                })
+
+                            buildFilmTable(selectedFilms)
+                            return
+                        }
+                        waitNextFilmsPages(page + 1, filmsCount)
+                    })
+                    .catch((err) => {
+                        catchFetchError(err)
+                        return
+                    })
+            }
+
+
+            // recursion
+            waitNextFilmsPages(1, maxFilmsCount)
+
+        }
+
+        const buildFilmTable = arr => {
+            let html = `<table>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Film</th>
+                            <th>Genres</th>
+                            <th class="film-date">Date</th>
+                            <th>Vote<br>Average</th>
+                            <th>Votes</th>
+                            
+                        </tr>
+                        `
+            console.log(arr)
+            arr.forEach(film => {
+                // console.log(urlSitePoster + film.poster_path);
+                html += `<tr>
+                    <td>
+                        <a href="${urlSiteMovie + film.id}">
+                        <img src="${urlSitePoster + film.poster_path}">
+                        </a>
+                    </td>
+                    <td>${film.title}</td>
+                    <td>${findGenres(film.genre_ids)}</td>
+                    <td class="film-date">${film.release_date}</td>
+                    <td>${film.vote_average}</td>
+                    <td>${film.vote_count}</td>
+                    
+                    </tr>`
+            })
+
+            table.innerHTML = html + '</table>'
+        }
+
+        const refreshFilmsTable = event => {
+            let fCount = +filmsCount.value
+            if (fCount > 100 || fCount <= 0) {
+                fCount = 10;
+                filmsCount.value = fCount
+            }
+            let fVotes = +filmsMinVotes.value
+            if (fVotes > 1000 || fVotes <= 0) {
+                fVotes = 10;
+                filmsMinVotes.value = fVotes
+            }
+
+
+            table.innerHTML = ''
+
+            makeFilmObj(fCount,
+                fVotes,
+                new Date().getFullYear())
+        }
+
+
+        const findGenres = arr => {
+            return genres.reduce((str, genre) => {
+                for (let id of arr) {
+                    if (id === genre.id) return str + genre.name + ' '
+                }
+                return str
+            }, '')
+        }
+
+        // init
+        // btn.addEventListener('click', refreshBtnClick)
+        filmsCount.addEventListener('input', refreshFilmsTable)
+        filmsMinVotes.addEventListener('input', refreshFilmsTable)
+
+        // load genre
+        fetch(buildGetUrl(urlGenre, {}))
+            .then(checkJson)
+            .then(resp => {
+                genres = resp.genres
+                console.log(findGenres([16, 35, 80]));
+                refreshFilmsTable()
+            })
+            .catch(catchFetchError)
+
+
+
+
+    </script>
+</body>
+
+</html>
