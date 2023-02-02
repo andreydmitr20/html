@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github API test</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        h1 {
+            text-align: center;
+        }
+
+        #gh-user {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        #gh-repos {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Github API test</h1>
+    <div id="gh-form">
+    </div>
+
+
+    <script type="module">
+        import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+
+        const ghForm = document.querySelector('#gh-form')
+
+        // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+        const token = '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'
+        const owner = 'andreydmitr20'
+        const octokit = new Octokit({ auth: `${token}` });
+
+
+        let catchErr = ''
+        let resp
+        try {
+
+
+            // auth
+            catchErr = "Can't login github"
+            resp = await octokit.request("/user")
+            const user = resp.data
+            // console.log(user)
+            ghForm.innerHTML += `
+                <div id="gh-user" style="float:left;">
+                <h2>${user.login}</h2>
+                <a href="${user.html_url}"><img src="${user.avatar_url}"></a>
+                </div>
+            `
+
+            // repos
+            catchErr = "Can't get github repos"
+            resp = await octokit.request("/user/repos");
+            let repos = resp.data
+            console.log(repos)
+            let html = `<div id="gh-repos" style="float:left;">
+                <ul>`
+            repos.map(repo => {
+                html += `<li><a href="${repo.clone_url}">
+                            ${repo.full_name} ( ${repo.language} )
+                        </a></li>`
+            })
+            ghForm.innerHTML += html + `</ul></div>`
+
+
+
+
+        } catch (err) {
+            console.error(err);
+            console.log(catchErr)
+        }
+
+
+    </script>
+</body>
+
+</html>
