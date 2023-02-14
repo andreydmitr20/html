@@ -14,21 +14,38 @@
     <div class="main-wrapper">
         <div class="div-top">
             <div class="budget-summary">
+                <div class="available-budget">
+                    <h1>Available Budget in</h1>
 
-                <h1>Available Budget in <span>September</span></h1>
+                    <select id="month">
+                        <option value="1" default>January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+
+
+                </div>
 
                 <div class="budget-sum">
-                    +0
                 </div>
 
                 <div class="div-income">
                     <div>INCOME</div>
-                    <div>+0</div>
+                    <div></div>
                 </div>
 
                 <div class="div-expences">
                     <div>EXPENCES</div>
-                    <div>+0</div>
+                    <div></div>
                 </div>
 
             </div>
@@ -41,7 +58,7 @@
                     <option value="-">-</option>
                 </select>
                 <input type="text" placeholder="Add description" required>
-                <input type="number" min="0.01" required>
+                <input type="number" required>
                 <button type="submit"><img src="img/check.png" alt="Apply"></button>
             </form>
         </div>
@@ -50,17 +67,11 @@
             <div class="income-part">
                 <div>INCOME</div>
                 <ul id="income-list">
-                    <li><span>test</span><span>+0</span></li>
-                    <li><span>test</span><span>+0</span></li>
-                    <li><span>test</span><span>+0</span></li>
                 </ul>
             </div>
             <div class="expences-part">
                 <div>EXPENCES</div>
                 <ul id="expences-list">
-                    <li><span>test</span><span>+0</span></li>
-                    <li><span>test</span><span>+0</span></li>
-                    <li><span>test</span><span>+0</span></li>
                 </ul>
             </div>
         </div>

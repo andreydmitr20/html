@@ -33,7 +33,7 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.2;
+  opacity: 0.4;
   background-image: url("../img/mountains.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -45,6 +45,7 @@
   width: 20rem;
   margin: 1rem auto;
 
+  opacity: 0.8;
   text-align: center;
   color: var(--top-color);
   font-size: var(--font-size);
@@ -126,7 +127,10 @@
   text-align: right;
   flex: 1;
 }
-
+.div-middle .form-budget button:hover,
+.div-middle .form-budget button:focus {
+  cursor: pointer;
+}
 /*
 
 
@@ -134,6 +138,7 @@
 
 
 */
+
 .div-bottom {
   flex: auto;
 
@@ -145,6 +150,15 @@
   /* justify-items: flex-start; */
   /* height: 50rem; */
 }
+
+.div-bottom li:hover div:last-child {
+  display: block;
+  cursor: pointer;
+}
+.div-bottom li div:last-child {
+  display: none;
+}
+
 .div-bottom .income-part {
   flex: 1;
   color: var(--income-color);
@@ -162,12 +176,22 @@
   border-bottom: 0.1rem solid var(--bg-summary);
 }
 #income-list li span:first-child {
-  flex: 3;
+  flex: 8;
   color: var(--list-font-color);
 }
 #income-list li span:last-child {
-  flex: 1;
+  flex: 3;
   color: var(--income-color);
+}
+
+#income-list li div:first-child {
+  flex: 1;
+  /* color: var(--list-font-color); */
+}
+#income-list li div:last-child {
+  flex: 1;
+  margin-left: 0.4rem;
+  /* color: var(--income-color); */
 }
 #income-list li:nth-child(even) {
   background-color: var(--bg-summary);
@@ -180,13 +204,23 @@
   align-items: space-around;
   border-bottom: 0.1rem solid var(--bg-summary);
 }
+
 #expences-list li span:first-child {
-  flex: 3;
+  flex: 8;
   color: var(--list-font-color);
 }
 #expences-list li span:last-child {
-  flex: 1;
+  flex: 3;
   color: var(--expences-color);
+}
+#expences-list li div:first-child {
+  flex: 1;
+  /* color: var(--list-font-color); */
+}
+#expences-list li div:last-child {
+  flex: 1;
+  margin-left: 0.4rem;
+  /* color: var(--income-color); */
 }
 #expences-list li:nth-child(even) {
   background-color: var(--bg-summary);
