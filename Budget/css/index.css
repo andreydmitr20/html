@@ -1,0 +1,193 @@
+.main-wrapper {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+
+  /* border: var(--deb-border); */
+}
+
+.div-top {
+  flex: auto;
+  position: relative;
+
+  height: 15rem;
+  width: 100%;
+  /* opacity: 1; */
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+.div-top::before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.2;
+  background-image: url("../img/mountains.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.budget-summary {
+  flex: auto;
+  /* height: 10rem; */
+  width: 20rem;
+  margin: 1rem auto;
+
+  text-align: center;
+  color: var(--top-color);
+  font-size: var(--font-size);
+  background-color: var(--bg-summary);
+
+  /* border: var(--main-border); */
+}
+.budget-summary h1 {
+  filter: drop-shadow(0 0 0.2rem black);
+}
+.budget-summary .budget-sum {
+  font-size: var(--font-size-big);
+  margin-bottom: 2rem;
+}
+
+.budget-summary .div-income {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 2rem;
+
+  font-size: var(--font-size-mid);
+  background-color: var(--income-color);
+}
+.budget-summary .div-income div:first-child {
+  flex: auto;
+}
+.budget-summary .div-income div:last-child {
+  flex: auto;
+}
+
+.budget-summary .div-expences {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 2rem;
+
+  font-size: var(--font-size-mid);
+  background-color: var(--expences-color);
+}
+.budget-summary .div-expences div:first-child {
+  flex: auto;
+}
+.budget-summary .div-expences div:last-child {
+  flex: auto;
+}
+
+/* 
+
+
+
+
+
+ */
+.div-middle {
+  flex: auto;
+  margin: 0.5rem auto;
+  width: 80%;
+  height: 2rem;
+}
+.div-middle .form-budget {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.div-middle .form-budget img {
+  flex: 1;
+  height: 1rem;
+}
+.div-middle .form-budget input[type="text"] {
+  flex: 4;
+}
+.div-middle .form-budget input[type="number"] {
+  text-align: right;
+  flex: 1;
+}
+
+/*
+
+
+
+
+
+*/
+.div-bottom {
+  flex: auto;
+
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  /* justify-items: flex-start; */
+  /* height: 50rem; */
+}
+.div-bottom .income-part {
+  flex: 1;
+  color: var(--income-color);
+}
+.div-bottom .expences-part {
+  flex: 1;
+  color: var(--expences-color);
+}
+
+#income-list li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: space-around;
+  border-bottom: 0.1rem solid var(--bg-summary);
+}
+#income-list li span:first-child {
+  flex: 3;
+  color: var(--list-font-color);
+}
+#income-list li span:last-child {
+  flex: 1;
+  color: var(--income-color);
+}
+#income-list li:nth-child(even) {
+  background-color: var(--bg-summary);
+}
+
+#expences-list li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: space-around;
+  border-bottom: 0.1rem solid var(--bg-summary);
+}
+#expences-list li span:first-child {
+  flex: 3;
+  color: var(--list-font-color);
+}
+#expences-list li span:last-child {
+  flex: 1;
+  color: var(--expences-color);
+}
+#expences-list li:nth-child(even) {
+  background-color: var(--bg-summary);
+}

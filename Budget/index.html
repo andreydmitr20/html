@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="div-top">
+            <div class="budget-summary">
+
+                <h1>Available Budget in <span>September</span></h1>
+
+                <div class="budget-sum">
+                    +0
+                </div>
+
+                <div class="div-income">
+                    <div>INCOME</div>
+                    <div>+0</div>
+                </div>
+
+                <div class="div-expences">
+                    <div>EXPENCES</div>
+                    <div>+0</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="div-middle">
+            <form class="form-budget">
+                <select>
+                    <option value="+" default>+</option>
+                    <option value="-">-</option>
+                </select>
+                <input type="text" placeholder="Add description" required>
+                <input type="number" min="0.01" required>
+                <button type="submit"><img src="img/check.png" alt="Apply"></button>
+            </form>
+        </div>
+
+        <div class="div-bottom">
+            <div class="income-part">
+                <div>INCOME</div>
+                <ul id="income-list">
+                    <li><span>test</span><span>+0</span></li>
+                    <li><span>test</span><span>+0</span></li>
+                    <li><span>test</span><span>+0</span></li>
+                </ul>
+            </div>
+            <div class="expences-part">
+                <div>EXPENCES</div>
+                <ul id="expences-list">
+                    <li><span>test</span><span>+0</span></li>
+                    <li><span>test</span><span>+0</span></li>
+                    <li><span>test</span><span>+0</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>

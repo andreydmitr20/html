@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --bg-color: rgb(244, 166, 69);
+  --bg-summary: rgb(151, 146, 140);
+  --deb-border: 0.1rem solid green;
+  --main-border: 0.3rem solid yellow;
+  --income-color: rgb(114, 231, 114);
+  --expences-color: rgb(231, 113, 113);
+  --main-border: 0.3rem solid yellow;
+  --top-color: white;
+  --list-font-color: black;
+  --font-size: 0.5rem;
+  --font-size-mid: 1rem;
+  --font-size-big: 2rem;
+}
