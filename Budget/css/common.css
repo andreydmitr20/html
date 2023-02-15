@@ -2,8 +2,8 @@
   box-sizing: border-box;
 }
 :root {
-  --bg-color: rgb(244, 166, 69);
-  --bg-summary: rgb(151, 146, 140);
+  --bg-color: rgb(144, 100, 69);
+  --bg-summary: rgb(151, 100, 140);
   --deb-border: 0.1rem solid green;
   --main-border: 0.3rem solid yellow;
   --income-color: rgb(114, 231, 114);

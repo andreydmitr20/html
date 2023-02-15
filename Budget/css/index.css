@@ -113,7 +113,7 @@
 }
 .div-middle .form-budget {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: center;
 }
 .div-middle .form-budget img {
@@ -154,7 +154,18 @@
 .div-bottom li:hover div:last-child {
   display: block;
   cursor: pointer;
+  text-align: center;
+  border-radius: 0.2rem;
+  color: var(--list-font-color);
+  background-color: var(--top-color);
+  filter: drop-shadow(0 0 0.3rem var(--bg-color));
 }
+/* percent */
+.div-bottom li div:first-of-type {
+  margin-left: 1rem;
+  filter: drop-shadow(0 0 0.3rem var(--top-color));
+}
+
 .div-bottom li div:last-child {
   display: none;
 }
@@ -168,12 +179,21 @@
   color: var(--expences-color);
 }
 
+.div-bottom ul {
+  list-style-position: inside;
+  list-style-type: none;
+  font-size: 2vw;
+}
+
 #income-list li {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: space-around;
   border-bottom: 0.1rem solid var(--bg-summary);
+}
+#income-list li span {
+  filter: drop-shadow(0 0 0.2rem var(--top-color));
 }
 #income-list li span:first-child {
   flex: 8;
@@ -194,7 +214,7 @@
   /* color: var(--income-color); */
 }
 #income-list li:nth-child(even) {
-  background-color: var(--bg-summary);
+  background-color: var(--bg-color);
 }
 
 #expences-list li {
@@ -205,6 +225,9 @@
   border-bottom: 0.1rem solid var(--bg-summary);
 }
 
+#expences-list li span {
+  filter: drop-shadow(0 0 0.3rem var(--top-color));
+}
 #expences-list li span:first-child {
   flex: 8;
   color: var(--list-font-color);
@@ -223,5 +246,5 @@
   /* color: var(--income-color); */
 }
 #expences-list li:nth-child(even) {
-  background-color: var(--bg-summary);
+  background-color: var(--bg-color);
 }

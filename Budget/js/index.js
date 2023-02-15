@@ -112,14 +112,31 @@ const refreshUI = () => {
   budgetSum.textContent = (incomeSum - expencesSum).toFixed(2)
   budgetSumIncome.textContent = incomeSum.toFixed(2)
   budgetSumExpences.textContent = -expencesSum.toFixed(2)
+  // percent
+  Array.from(incomeList.children).forEach(li => {
+    li.querySelectorAll('div')[0].textContent =
+      ((+li.querySelectorAll('span')[1].innerText * 100) / incomeSum).toFixed(
+        1
+      ) + ' %'
+  })
+  Array.from(expencesList.children).forEach(li => {
+    li.querySelectorAll('div')[0].textContent =
+      ((-li.querySelectorAll('span')[1].innerText * 100) / expencesSum).toFixed(
+        1
+      ) + ' %'
+  })
 }
 
 // add to budget
 const formBudgetAddClicked = event => {
   event.preventDefault()
+  // check
+  let desc = formBudgetDesc.value
+  let value = +formBudgetValue.value
+  if (desc === '' || value === NaN) return
   addMonthData(+monthSelect.value, {
-    desc: formBudgetDesc.value,
-    value: formBudgetSign.value + formBudgetValue.value
+    desc: desc,
+    value: formBudgetSign.value + value
   })
   formBudgetDesc.value = ''
   formBudgetValue.value = ''
