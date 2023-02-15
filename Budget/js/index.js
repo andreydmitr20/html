@@ -111,7 +111,7 @@ const refreshUI = () => {
   //   console.log(expencesSum)
   budgetSum.textContent = (incomeSum - expencesSum).toFixed(2)
   budgetSumIncome.textContent = incomeSum.toFixed(2)
-  budgetSumExpences.textContent = -expencesSum.toFixed(2)
+  budgetSumExpences.textContent = (-expencesSum).toFixed(2)
   // percent
   Array.from(incomeList.children).forEach(li => {
     li.querySelectorAll('div')[0].textContent =
@@ -133,7 +133,7 @@ const formBudgetAddClicked = event => {
   // check
   let desc = formBudgetDesc.value
   let value = +formBudgetValue.value
-  if (desc === '' || value === NaN) return
+  if (desc === '' || value === NaN || value === 0) return
   addMonthData(+monthSelect.value, {
     desc: desc,
     value: formBudgetSign.value + value
